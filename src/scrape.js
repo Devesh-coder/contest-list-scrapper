@@ -72,6 +72,8 @@ async function scrape() {
 			contests.codeforces.push(contest)
 		})
 
+	//CodingNinja
+
 	console.log(contests)
 }
 
