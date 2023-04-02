@@ -7,6 +7,7 @@ async function scrape() {
 		codechef: [],
 		codeforces: [],
 		codingNinja: [],
+		geeksforgeeks: [],
 	}
 
 	//LeetCode
@@ -31,14 +32,13 @@ async function scrape() {
 
 			contests.leetcode.push(contest)
 		})
-
 	// Codechef
 	// Use python script to scrape codechef contest data
 
 	//Codeforces
 
 	let url = 'https://codeforces.com'
-	result = await axios.get(url + '/contests')
+	result = await axios.get('https://codeforces.com/contests')
 	$ = cheerio.load(result.data)
 	item = $('div.datatable').first()
 
@@ -47,29 +47,31 @@ async function scrape() {
 	$(item)
 		.find('table tbody tr')
 		.each(function (i, elm) {
-			$(this)
-				.find('td')
-				.each(function (i, e) {
-					// console.log($(this).text().trim())
-					if (i == 0) {
-						title = $(this).text().trim()
-					} else if (i == 2) {
-						time = $(this).text().trim()
-					} else if (i == 3) {
-						duration = $(this).text().trim()
-					} else if (i == 5) {
-						link = url + $(this).find('a').attr('href')
-					}
-				})
-			console.log(title, link, time, duration)
-			let contest = {
-				title,
-				link,
-				time,
-				duration,
-			}
+			if (i >= 1) {
+				$(this)
+					.find('td')
+					.each(function (i, e) {
+						// console.log($(this).text().trim())
+						if (i == 0) {
+							title = $(this).text().trim()
+						} else if (i == 2) {
+							time = $(this).text().trim()
+						} else if (i == 3) {
+							duration = $(this).text().trim()
+						} else if (i == 5) {
+							link = url + $(this).find('a').attr('href')
+						}
+					})
+				console.log(title, link, time, duration)
+				let contest = {
+					title,
+					link,
+					time,
+					duration,
+				}
 
-			contests.codeforces.push(contest)
+				contests.codeforces.push(contest)
+			}
 		})
 
 	//CodingNinja
