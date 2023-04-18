@@ -1,14 +1,54 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-const puppeteer = require('puppeteer')
 const cors = require('cors')
 const express = require('express')
+const { spawn } = require('child_process')
+const fs = require('fs')
 const port = 5000
 const app = express()
 app.use(cors())
 
 const LeetCode = []
 const Codeforces = []
+
+app.get('/', async (req, res) => {
+	try {
+		const callingPythonScript = async () => {
+			// Set the path to the Python script
+			const pythonScriptPath = 'scrape.py'
+
+			// Create a new child process using spawn()
+			const pythonProcess = spawn('python', [pythonScriptPath])
+
+			// Handle standard output from the script
+			pythonProcess.stdout.on('data', (data) => {
+				console.log(`stdout: ${data}`)
+			})
+
+			// Handle errors from the script
+			pythonProcess.stderr.on('data', (data) => {
+				console.error(`stderr: ${data}`)
+			})
+
+			// Handle the process exit event
+			return new Promise((resolve, reject) => {
+				pythonProcess.on('exit', (code) => {
+					console.log(`Child process exited with code ${code}`)
+					resolve()
+				})
+			})
+		}
+
+		await callingPythonScript()
+
+		const data = fs.readFileSync('data.json', 'utf8')
+		console.log(typeof JSON.parse(data))
+		res.send(JSON.parse(data)[0])
+	} catch (error) {
+		console.error(error)
+		res.status(500).send('An error occurred')
+	}
+})
 
 app.get('/leetcode', (req, res) => {
 	console.log('Hello World!')
@@ -78,52 +118,6 @@ async function scrape() {
 		})
 
 	console.log(Codeforces)
-
-	// -------------------------------------------------------------------------------------
-
-	//GeeksForGeeks
-
-	// const browser = await puppeteer.launch()
-	// const page = await browser.newPage()
-	// await page.goto('https://practice.geeksforgeeks.org/events')
-
-	// console.log('start evaluate javascript')
-
-	// var productNames = await page.evaluate(() => {
-	// 	var div = document.querySelectorAll('eventsLanding_allEventsContainer__e8bYf')
-	// 	console.log(div[0]) // console.log inside evaluate, will show on browser console not on node console
-
-	// 	var productnames = []
-	// 	div.forEach((element) => {
-	// 		let titleelem = element.querySelector(
-	// 			'eventsLanding_upcomingEvents__zjqtF',
-	// 		).textContent
-	// 		if (titleelem != null) {
-	// 			console.log(titleelem)
-	// 		} else {
-	// 			console.log('Nothing just a racing incident')
-	// 		}
-	// 	})
-
-	// 	return productnames
-	// })
-
-	// console.log(productNames)
-	// browser.close()
-	// console.log(GeeksForGeeks)
-
-	// -------------------------------------------------------------------------------------
-
-	//CodingNinja
-
-	// -------------------------------------------------------------------------------------
-
-	// Codechef
-	// Use python script to scrape codechef contest data
-
-	// -------------------------------------------------------------------------------------
-
-	// console.log(contests)
 }
 
 scrape()

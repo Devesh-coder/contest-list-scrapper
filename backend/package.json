@@ -14,6 +14,8 @@
 		"cheerio": "^1.0.0-rc.12",
 		"cors": "^2.8.5",
 		"express": "^4.18.2",
-		"puppeteer": "^19.8.3"
+		"flask": "^0.2.10",
+		"puppeteer": "^19.8.3",
+		"python-shell": "^5.0.0"
 	}
 }
