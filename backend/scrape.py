@@ -11,6 +11,8 @@ import sys
 import ast # for converting string to dict
 
 op = webdriver.ChromeOptions()
+op.add_argument('headless')
+op.add_argument('window-size=1200x600') # setting window size is optional
 
 
 # PATH = "C:\Program Files (x86)\chromedriver.exe"
@@ -26,10 +28,6 @@ def contest_schema(contest_name, contest_link, contest_start_time, contest_durat
 
 
 def gfg():
-
-    # op = webdriver.ChromeOptions()
-    op.add_argument('headless')
-    op.add_argument('window-size=1200x600') # setting window size is optional
 
     driver = webdriver.Chrome(options=op)
 
@@ -68,9 +66,6 @@ def gfg():
 def codingNinja():
     ninja = 'https://www.codingninjas.com/codestudio/contests'
 
-    op.add_argument('headless')
-    op.add_argument('window-size=1200x600') # setting window size is optional
-
     driver = webdriver.Chrome(options=op)
 
 
@@ -98,9 +93,6 @@ def codechef():
 
     codechef = 'https://www.codechef.com/contests'
 
-    
-    op.add_argument('headless')
-    op.add_argument('window-size=1200x600') # setting window size is optional
     driver = webdriver.Chrome(options=op)
 
     driver.get(codechef)
@@ -156,22 +148,6 @@ def scrape_data():
     for thread in threads:
         # print("Waiting for {thread} to complete...")
         thread.join()
-
-    # Print the results
-    # for contest in contest_data:
-    #     print(contest.keys(), '\n\n')
-    #     for key in contest:
-    #         print(key)
-    #         if key in contest and contest[key] is not None:
-    #             for data in contest[key]:
-    #                 print(data)
-    #         print('\n')
-
-    #     print('\n')
-
-    # print( contest_data)
-    # json.dumps(contest_data)
-    # print(type(contest_data))
 
     try:
         f = open("data.json", "w")
