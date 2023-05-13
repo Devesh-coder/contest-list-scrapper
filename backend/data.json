@@ -1,0 +1,146 @@
+[
+	{
+		"CodingNinja": [
+			{
+				"name": "ByteBrawl | LJIET",
+				"link": "",
+				"startTime": "Starts in\n14\n:\n35\n:\n38",
+				"duration": "2hr"
+			},
+			{
+				"name": "Codestudio Beginner Contest 34",
+				"link": "",
+				"startTime": "Starts in 4 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Code Crunch | SKN Sinhgad",
+				"link": "",
+				"startTime": "Starts in 13 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "IIT Mandi | Placement Assessment Test",
+				"link": "",
+				"startTime": "Starts in\n21\n:\n35\n:\n38",
+				"duration": "2hr"
+			},
+			{
+				"name": "Chandigarh Group of Colleges (CGC), Landran | Placement Assessment Test",
+				"link": "",
+				"startTime": "Starts in\n21\n:\n35\n:\n38",
+				"duration": "2hr"
+			},
+			{
+				"name": "CGU Coding Premier League | C. V. RAMAN GLOBAL UNIVERSITY",
+				"link": "",
+				"startTime": "Starts in\n22\n:\n05\n:\n37",
+				"duration": "2hr"
+			},
+			{
+				"name": "CodeCrushing DSA | RNS Institute of technology",
+				"link": "",
+				"startTime": "Starts in 4 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Lovely Professional University | PAT",
+				"link": "",
+				"startTime": "Starts in 7 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Mastering SQL || MCQ",
+				"link": "",
+				"startTime": "Starts in 13 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Code Crusade || Inter Jabalpur Coding Tournament || BGIEM",
+				"link": "",
+				"startTime": "Round 2 starts in 6 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Cracking Google || DYPCET",
+				"link": "",
+				"startTime": "Starts in\n13\n:\n35\n:\n36",
+				"duration": "2hr"
+			},
+			{
+				"name": "InnoHacks-QU",
+				"link": "",
+				"startTime": "Starts in\n20\n:\n35\n:\n36",
+				"duration": "2hr"
+			},
+			{
+				"name": "CodeChase: ISTS Women's Engineering College",
+				"link": "",
+				"startTime": "Starts in 1 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Let Us C || MCQ",
+				"link": "",
+				"startTime": "Starts in 2 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Code Claw | Gaya Engineering College",
+				"link": "",
+				"startTime": "Starts in 3 days",
+				"duration": "2hr"
+			}
+		]
+	},
+	{
+		"Codechef": [
+			{
+				"name": "Starters 90",
+				"link": "https://www.codechef.com/START90",
+				"startTime": "17 May 2023\nWed 20:00",
+				"duration": "2 Hrs"
+			},
+			{
+				"name": "Starters 91",
+				"link": "https://www.codechef.com/START91",
+				"startTime": "24 May 2023\nWed 20:00",
+				"duration": "2 Hrs"
+			},
+			{
+				"name": "Starters 92",
+				"link": "https://www.codechef.com/START92",
+				"startTime": "31 May 2023\nWed 20:00",
+				"duration": "2 Hrs"
+			}
+		]
+	},
+	{
+		"GeeksForGeeks": [
+			{
+				"name": "GFG Weekly Coding Contest - 102",
+				"link": "",
+				"startTime": "May 14, 2023 07:00 PM IST",
+				"duration": "2hr"
+			},
+			{
+				"name": "Job-A-Thon 20 - Hiring Challenge",
+				"link": "",
+				"startTime": "May 21, 2023 08:00 PM IST",
+				"duration": "2hr"
+			},
+			{
+				"name": "GATE CS 2024 Subjective Scholarship Test",
+				"link": "",
+				"startTime": "May 24, 2023 12:00 AM IST",
+				"duration": "2hr"
+			},
+			{
+				"name": "Bi-Wizard School Coding Tournament 15.0",
+				"link": "",
+				"startTime": "May 26, 2023 06:00 PM IST",
+				"duration": "2hr"
+			}
+		]
+	}
+]
