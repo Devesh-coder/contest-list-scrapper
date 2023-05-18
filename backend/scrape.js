@@ -1,58 +1,11 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-const cors = require('cors')
-const express = require('express')
-const { spawn } = require('child_process')
 const fs = require('fs')
 var cron = require('node-cron')
 const data_fetch = require('./data-fetcher/data-fetch')
-const port = 5000 || process.env.PORT
-const app = express()
-app.use(cors())
 
 const LeetCode = []
 const Codeforces = []
-
-app.get('/', async (req, res) => {
-	// try {
-	// 	const callingPythonScript = async () => {
-	// 		// Set the path to the Python script
-	// 		const pythonScriptPath = 'scrape.py'
-
-	// 		// Create a new child process using spawn()
-	// 		const pythonProcess = spawn('python', [pythonScriptPath])
-
-	// 		// Handle standard output from the script
-	// 		pythonProcess.stdout.on('data', (data) => {
-	// 			console.log(`stdout: ${data}`)
-	// 		})
-
-	// 		// Handle errors from the script
-	// 		pythonProcess.stderr.on('data', (data) => {
-	// 			console.error(`stderr: ${data}`)
-	// 		})
-
-	// 		// Handle the process exit event
-	// 		return new Promise((resolve, reject) => {
-	// 			pythonProcess.on('exit', (code) => {
-	// 				console.log(`Child process exited with code ${code}`)
-	// 				resolve()
-	// 			})
-	// 		})
-	// 	}
-
-	// 	await callingPythonScript()
-
-	// 	const data = fs.readFileSync('data.json', 'utf8')
-	// 	console.log(typeof JSON.parse(data))
-	// 	res.send(JSON.parse(data)[0])
-	// } catch (error) {
-	// 	console.error(error)
-	// 	res.status(500).send('An error occurred')
-	// }
-
-	console.log('Hello World!')
-})
 
 cron.schedule('1 * * * * *', async () => {
 	try {
@@ -139,8 +92,4 @@ cron.schedule('1 * * * * *', async () => {
 // 	console.log(Codeforces)
 // }
 
-scrape()
-
-app.listen(port, () => {
-	console.log(`Example app listening at http://localhost:${port}`)
-})
+// scrape()
