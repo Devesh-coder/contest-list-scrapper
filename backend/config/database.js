@@ -1,12 +1,10 @@
 const mongoose = require('mongoose')
+const dotenv = require('dotenv').config()
 
-class Connection {
-	constructor() {
-		const url =
-			process.env.MONGODB_URL || `mongodb://localhost:27017/contest-cluster`
-		console.log('Establish new connection with url', url)
-		mongoose.connect(url)
-	}
-}
+const url = process.env.MONGO_URL
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
-module.exports = new Connection()
+const con = mongoose.connection
+con.on('open', () => {
+	console.log('Connected...')
+})
