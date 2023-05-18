@@ -52,8 +52,7 @@ def gfg():
             contest_date = date[0].text
             contest_start_time = date[1].text
             contest_name = date[2].text
-            contest_link = ""
-            contest_duration = "2hr"
+            contest_duration = "1.5hr"
 
             gfg_contest.append(contest_schema(
                 contest_name, contest_link, contest_date + " " + contest_start_time, contest_duration))
@@ -128,6 +127,92 @@ def codechef():
         print('Inside Codechef \n')
 
 
+def leetcode():
+    leetcode = 'https://leetcode.com/contest/'
+
+    driver = webdriver.Chrome(options=op)
+
+    driver.get(leetcode)
+    print(driver.title)
+
+    try:
+        # print("Inside leetcode")
+
+        WebDriverWait(driver, 7).until(EC.visibility_of_element_located(
+            (By.CLASS_NAME, "swiper-wrapper")))
+        upcoming_contests = driver.find_element(
+            By.CLASS_NAME, "swiper-wrapper").find_elements(By.CLASS_NAME, "swiper-slide")
+
+        print(len(upcoming_contests), "upcoming contests", upcoming_contests)
+        leetcode_data = []
+
+        for contest in upcoming_contests:
+            contest_link = contest.find_element(
+                By.TAG_NAME, "a").get_attribute("href")
+            # print(contest_link)
+            contest_name = contest.find_element(
+                By.CLASS_NAME, "truncate").text
+            contest_start_time = contest.find_element(
+                By.CLASS_NAME, "text-label-2 ").text
+            contest_duration = "2hr"
+            # print(contest_name, contest_start_time, contest_duration)
+
+            leetcode_data.append(contest_schema(
+                contest_name, contest_link, contest_start_time, contest_duration))
+        return leetcode_data
+
+    except TimeoutException:
+        print("Element not found or not visible")
+        print('Inside Codechef \n')
+
+
+def codeforces():
+
+    codeforces = 'https://codeforces.com/contests'
+
+    driver = webdriver.Chrome(options=op)
+
+    driver.get(codeforces)
+    print(driver.title)
+
+    try:
+        WebDriverWait(driver, 7).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, "datatable")))
+        upcoming_contests = driver.find_element(By.CLASS_NAME, "datatable")
+
+        contest_table = upcoming_contests.find_element(
+            By.TAG_NAME, "tbody").find_elements(By.TAG_NAME, "tr")
+
+        codeforces_data = []
+
+        i = 0
+        for contest in contest_table:
+            # print(contest.text)
+            if i >= 1:
+                cur_contest = contest.find_elements(By.TAG_NAME, "td")
+                contest_name = cur_contest[0].text
+                contest_start_time = cur_contest[2].text
+                contest_duration = cur_contest[3].text
+                try:
+                    contest_link = cur_contest[5].find_element(
+                        By.TAG_NAME, "a").get_attribute("href")
+                except:
+                    contest_link = cur_contest[5].text
+
+                # print(contest_name, contest_start_time,
+                #       contest_duration, contest_link)
+
+                codeforces_data.append(contest_schema(
+                    contest_name, contest_link, contest_start_time, contest_duration))
+            i += 1
+
+        return codeforces_data
+
+    except TimeoutException:
+        print("Element not found or not visible")
+        print('Inside Codeforces \n')
+
+
 def scrape_data():
 
     threads = []
@@ -145,6 +230,10 @@ def scrape_data():
                    args=("CodingNinja", codingNinja)))
     threads.append(threading.Thread(
         target=scrape_site, args=("Codechef", codechef)))
+    threads.append(threading.Thread(
+        target=scrape_site, args=("Leetcode", leetcode)))
+    threads.append(threading.Thread(
+        target=scrape_site, args=("Codeforces", codeforces)))
 
     # Start all of the threads
     for thread in threads:
