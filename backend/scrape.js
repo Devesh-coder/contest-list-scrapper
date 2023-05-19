@@ -1,6 +1,9 @@
 const fs = require('fs')
 var cron = require('node-cron')
 const data_fetch = require('./data-fetcher/data-fetch')
+const express = require('express')
+const app = express()
+const contestUpload = require('./routes/contestsDataDB')
 
 cron.schedule('1 * * * * *', async () => {
 	try {
@@ -9,8 +12,9 @@ cron.schedule('1 * * * * *', async () => {
 		// Your asynchronous code or function call
 		// await data_fetch()
 
-		// const data = fs.readFileSync('data.json', 'utf8')
-		console.log('data fetched')
+		console.log('data scraped and fetched')
+
+		contestUpload()
 	} catch (error) {
 		console.error(error)
 	}

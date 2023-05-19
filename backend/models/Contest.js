@@ -1,17 +1,15 @@
-import mongoose, { Schema } from 'mongoose'
+const mongoose = require('mongoose')
 
-const Contest = new Schema([
-	{
-		constestName: String,
-		contests: [
-			{
-				name: String,
-				link: String,
-				startTime: String,
-				duration: String,
-			},
-		],
-	},
-])
+const contestSchema = new mongoose.Schema({
+	contestName: String,
+	contests: [
+		{
+			name: String,
+			link: String,
+			startTime: String,
+			duration: String,
+		},
+	],
+})
 
-mongoose.model('Contest', Contest)
+module.exports = mongoose.model('Contest', contestSchema)

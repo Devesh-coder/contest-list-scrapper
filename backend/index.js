@@ -3,16 +3,17 @@ const cors = require('cors')
 const fs = require('fs')
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 const port = 5000 || process.env.PORT
 
 require('./config/database')
 require('./scrape')
 
-app.get('/', (req, res) => {
-	const data = fs.readFileSync('data.json', 'utf8')
-	res.send(data)
-})
+const contestsRoute = require('./routes/contestData')
+const contestsDataUpload = require('./routes/contestsDataDB')
+
+app.use('/contests', contestsRoute)
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)
