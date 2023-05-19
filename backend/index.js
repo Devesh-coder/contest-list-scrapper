@@ -11,7 +11,6 @@ require('./config/database')
 require('./scrape')
 
 const contestsRoute = require('./routes/contestData')
-const contestsDataUpload = require('./routes/contestsDataDB')
 
 app.use('/contests', contestsRoute)
 
