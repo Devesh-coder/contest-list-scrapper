@@ -1,0 +1,26 @@
+{
+	"name": "contest-scrapper",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"server": "node index.js --prefix backend",
+		"client": "npm start --prefix frontend",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Devesh-coder/contest-list-scrapper.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Devesh-coder/contest-list-scrapper/issues"
+	},
+	"homepage": "https://github.com/Devesh-coder/contest-list-scrapper#readme",
+	"dependencies": {
+		"concurrently": "^8.0.1"
+	}
+}

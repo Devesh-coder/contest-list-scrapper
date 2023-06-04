@@ -5,36 +5,23 @@ const cheerio = require('cheerio')
 const ContestContext = createContext()
 
 export const ContestProvider = ({ children }) => {
-	const [isLoading, setIsLoading] = useState(false)
-
-	const [leetcode, setLeetcode] = useState([])
-	const [codeforces, setCodeforces] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
+	const [contest, setContest] = useState([])
 
 	useEffect(() => {
-		async function scrape() {
-			// console.log('called')
-
-			let result = await axios.get('http://localhost:5000/leetcode')
-			let data = result.data
-			leetcode.push(data)
-
-			result = await axios.get('http://localhost:5000/codeforces')
-			data = result.data
-			// console.log(data[0])
-			codeforces.push(data)
-
-			// codeforces.map((item) => {
-			// 	console.log(item.title)
-			// })
-			setIsLoading(true)
+		const fetchData = async () => {
+			const data = await axios.get('https://localhost:5000/Contest')
+			setContest(data.data)
+			console.log(data.data)
 		}
-		scrape()
+		fetchData()
+
 		setIsLoading(false)
 	}, [])
 
 	return (
-		<ContestContext.Provider value={{ value: 1, leetcode, codeforces }}>
-			{children}
+		<ContestContext.Provider value={{ contest }}>
+			{!isLoading && children}
 		</ContestContext.Provider>
 	)
 }
