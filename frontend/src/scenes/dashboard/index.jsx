@@ -12,31 +12,23 @@ import GeographyChart from '../../components/GeographyChart'
 import BarChart from '../../components/BarChart'
 import StatBox from '../../components/StatBox'
 import ProgressCircle from '../../components/ProgressCircle'
+import ContestContext from '../../context/ContestContext'
+import { useContext } from 'react'
 
 const Dashboard = () => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
+	const { curContest } = useContext(ContestContext)
+	console.log(curContest.contests)
 
 	return (
 		<Box m='20px'>
 			{/* HEADER */}
 			<Box display='flex' justifyContent='space-between' alignItems='center'>
-				<Header title='DASHBOARD' subtitle='Welcome to your dashboard' />
-
-				<Box>
-					<Button
-						sx={{
-							backgroundColor: colors.blueAccent[700],
-							color: colors.grey[100],
-							fontSize: '14px',
-							fontWeight: 'bold',
-							padding: '10px 20px',
-						}}
-					>
-						<DownloadOutlinedIcon sx={{ mr: '10px' }} />
-						Download Reports
-					</Button>
-				</Box>
+				<Header
+					subtitle='Welcome to your dashboard'
+					title={curContest.contestName}
+				/>
 			</Box>
 
 			{/* GRID & CHARTS */}
@@ -46,25 +38,23 @@ const Dashboard = () => {
 				gridAutoRows='140px'
 				gap='20px'
 			>
-				{/* ROW 1 */}
-				<Box
-					gridColumn='span 3'
+				{curContest.contests.map((contest) => (
+					<>
+						<h2>{contest.name}</h2>
+						<h3>{contest.duration}</h3>
+						<h4>{contest.link}</h4>
+						<br />
+					</>
+				))}
+				{/* <Box
+					gridColumn='span 20'
 					backgroundColor={colors.primary[400]}
 					display='flex'
 					alignItems='center'
 					justifyContent='center'
-				>
-					<StatBox
-						title='12,361'
-						subtitle='Emails Sent'
-						progress='0.75'
-						increase='+14%'
-						icon={
-							<EmailIcon sx={{ color: colors.greenAccent[600], fontSize: '26px' }} />
-						}
-					/>
-				</Box>
-				<Box
+				></Box> */}
+
+				{/* <Box
 					gridColumn='span 3'
 					backgroundColor={colors.primary[400]}
 					display='flex'
@@ -120,7 +110,6 @@ const Dashboard = () => {
 					/>
 				</Box>
 
-				{/* ROW 2 */}
 				<Box
 					gridColumn='span 8'
 					gridRow='span 2'
@@ -145,13 +134,6 @@ const Dashboard = () => {
 								$59,342.32
 							</Typography>
 						</Box>
-						{/* <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box> */}
 					</Box>
 					<Box height='250px' m='-20px 0 0 0'>
 						<LineChart isDashboard={true} />
@@ -206,7 +188,6 @@ const Dashboard = () => {
 					))}
 				</Box>
 
-				{/* ROW 3 */}
 				<Box
 					gridColumn='span 4'
 					gridRow='span 2'
@@ -256,7 +237,7 @@ const Dashboard = () => {
 					<Box height='200px'>
 						<GeographyChart isDashboard={true} />
 					</Box>
-				</Box>
+				</Box> */}
 			</Box>
 		</Box>
 	)
