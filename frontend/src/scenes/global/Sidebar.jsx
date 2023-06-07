@@ -25,7 +25,7 @@ const Item = ({ title, to, icon, selected, setSelected, item }) => {
 			}}
 			icon={icon}
 		>
-			<Typography>{title}</Typography>
+			<Typography fontSize='1.1rem'>{title}</Typography>
 			<Link to={to} />
 		</MenuItem>
 	)
@@ -43,6 +43,7 @@ const Sidebar = () => {
 			sx={{
 				'& .pro-sidebar-inner': {
 					background: `${colors.primary[400]} !important`,
+					height: '100vh !important',
 				},
 				'& .pro-icon-wrapper': {
 					backgroundColor: 'transparent !important',
@@ -88,14 +89,6 @@ const Sidebar = () => {
 								setSelected={setSelected}
 							/>
 						))}
-
-						{/* <Item
-							title='Calendar'
-							to='/calendar'
-							icon={<CalendarTodayOutlinedIcon />}
-							selected={selected}
-							setSelected={setSelected}
-						/> */}
 					</Box>
 				</Menu>
 			</ProSidebar>
