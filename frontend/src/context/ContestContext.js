@@ -7,10 +7,33 @@ export const ContestProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [contest, setContest] = useState([])
 	const [curContest, setCurContest] = useState({})
+	const [color, setColor] = useState('none')
+
+	const background = [
+		{
+			title: 'CodingNinja',
+			background: 'linear-gradient(90deg,#f96b24 0%,#ff9100 100%)',
+		},
+		{
+			title: 'GeeksForGeeks',
+			background: 'linear-gradient(#39766b,#fcfdfc)',
+		},
+		{
+			title: 'Codechef',
+			background: '#FFFCF4',
+		},
+	]
 
 	// Onclicking the contest name on the sidebar
 	const contestClickSlider = (contest) => {
 		setCurContest(contest)
+
+		// background.map((item) => {
+		// 	if (item.title === contest.contestName) {
+		// 		console.log(item.background)
+		// 		return setColor(item.background)
+		// 	}
+		// })
 	}
 
 	useEffect(() => {
@@ -25,7 +48,9 @@ export const ContestProvider = ({ children }) => {
 	}, [])
 
 	return (
-		<ContestContext.Provider value={{ contest, contestClickSlider, curContest }}>
+		<ContestContext.Provider
+			value={{ contest, contestClickSlider, curContest, color }}
+		>
 			{!isLoading && children}
 		</ContestContext.Provider>
 	)
