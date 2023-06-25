@@ -36,9 +36,14 @@ export const ContestProvider = ({ children }) => {
 		// })
 	}
 
+	const handleCalendar = async (title) => {
+		console.log('calendar', title.title)
+		await axios.get(`/google`)
+	}
+
 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await axios.get('http://localhost:5000/contests')
+			const data = await axios.get('/contests')
 			setContest(data.data)
 			console.log(data.data)
 		}
@@ -49,7 +54,7 @@ export const ContestProvider = ({ children }) => {
 
 	return (
 		<ContestContext.Provider
-			value={{ contest, contestClickSlider, curContest, color }}
+			value={{ contest, contestClickSlider, curContest, color, handleCalendar }}
 		>
 			{!isLoading && children}
 		</ContestContext.Provider>

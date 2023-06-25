@@ -1,16 +1,10 @@
 import ContestContext from '../../context/ContestContext'
 import { useContext } from 'react'
 import Card from '../../components/Card'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faCalendarPlus } from '@fortawesome/free-solid-svg-icons'
 
 const Dashboard = () => {
 	const { curContest } = useContext(ContestContext)
 	console.log(curContest.contests)
-
-	// const handleClick = (e) => {
-	// 	console.log(e)
-	// }
 
 	return (
 		<>
@@ -21,14 +15,12 @@ const Dashboard = () => {
 						{curContest.contests &&
 							curContest.contests.map((contest) => (
 								<div className=' my-7'>
-									{/* <a href={contest.link} target='_blank'> */}
 									<Card
 										link={contest.link}
 										title={contest.name}
 										start={contest.startTime}
 										duration={contest.duration}
 									/>
-									{/* </a> */}
 									<br />
 								</div>
 							))}

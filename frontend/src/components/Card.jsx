@@ -4,12 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faCalendarPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Card({ link, title, start, duration }) {
-	// const { color } = useContext(ContestContext)
+	const { color, handleCalendar } = useContext(ContestContext)
 	// console.log(color)
-
-	const handleClick = (title) => {
-		console.log(title.title)
-	}
 
 	return (
 		<div
@@ -25,7 +21,7 @@ function Card({ link, title, start, duration }) {
 					fontSize: '1.25rem',
 					cursor: 'pointer',
 				}}
-				onClick={() => handleClick({ title })}
+				onClick={() => handleCalendar({ title })}
 			>
 				<FontAwesomeIcon icon={faCalendar} />
 			</span>
