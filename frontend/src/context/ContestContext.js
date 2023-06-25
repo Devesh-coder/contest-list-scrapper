@@ -36,8 +36,8 @@ export const ContestProvider = ({ children }) => {
 		// })
 	}
 
-	const handleCalendar = async (title) => {
-		console.log('calendar', title.title)
+	const handleCalendar = async (contest) => {
+		console.log('calendar', contest.contest)
 		await axios.get(`/google`)
 	}
 

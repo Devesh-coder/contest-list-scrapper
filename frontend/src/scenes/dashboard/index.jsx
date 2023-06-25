@@ -20,6 +20,7 @@ const Dashboard = () => {
 										title={contest.name}
 										start={contest.startTime}
 										duration={contest.duration}
+										contest={contest}
 									/>
 									<br />
 								</div>
