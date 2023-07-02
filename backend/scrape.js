@@ -2,7 +2,7 @@ var cron = require('node-cron')
 const data_fetch = require('./data-fetcher/data-fetch')
 const contestUpload = require('./routes/contestsDataDB')
 
-cron.schedule('0 0 * * 3', async () => {
+cron.schedule('* * * * *', async () => {
 	try {
 		console.log('Running every week on wednesday at 00:00')
 

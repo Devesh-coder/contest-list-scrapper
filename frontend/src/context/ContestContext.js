@@ -38,12 +38,12 @@ export const ContestProvider = ({ children }) => {
 
 	const handleCalendar = async (contest) => {
 		console.log('calendar', contest.contest)
-		await axios.get(`/google`)
+		await axios.get(`http://localhost:5000/google`)
 	}
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await axios.get('/contests')
+			const data = await axios.get('http://localhost:5000/contests')
 			setContest(data.data)
 			console.log(data.data)
 		}

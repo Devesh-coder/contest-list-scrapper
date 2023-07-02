@@ -15,7 +15,7 @@ const scopes = [
 	'https://www.googleapis.com/auth/userinfo.email',
 ]
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 	console.log('inside of the google route')
 	const url = oauth2Client.generateAuthUrl({
 		access_type: 'offline',
@@ -25,6 +25,7 @@ router.get('/', (req, res) => {
 
 	console.log(url)
 
+	res.header('Access-Control-Allow-Origin', '*')
 	res.redirect(url)
 })
 
@@ -37,6 +38,7 @@ router.get('/redirect', async (req, res) => {
 		oauth2Client.setCredentials(tokens)
 	}
 	console.log('ITs working now :) 	 inside of the redirect route')
+	res.header('Access-Control-Allow-Origin', '*')
 	res.redirect('/google/event')
 })
 
@@ -70,6 +72,8 @@ router.get('/event', async (req, res) => {
 		},
 	)
 	res.send('Event created')
+	// res.write('Event created')
+	// res.redirect('http://localhost:3000/')
 })
 
 router.get('/test', (req, res) => {
