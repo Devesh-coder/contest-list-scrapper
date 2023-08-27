@@ -8,6 +8,7 @@ export const ContestProvider = ({ children }) => {
 	const [contest, setContest] = useState([])
 	const [curContest, setCurContest] = useState({})
 	const [color, setColor] = useState('none')
+	const [showAllContests, setShowAllContests] = useState(true)
 
 	const background = [
 		{
@@ -26,7 +27,13 @@ export const ContestProvider = ({ children }) => {
 
 	// Onclicking the contest name on the sidebar
 	const contestClickSlider = (contest) => {
-		setCurContest(contest)
+		if (contest != 'All Contests') {
+			setCurContest(contest)
+			setShowAllContests(false)
+		} else {
+			setCurContest({})
+			setShowAllContests(true)
+		}
 
 		// background.map((item) => {
 		// 	if (item.title === contest.contestName) {
@@ -54,7 +61,14 @@ export const ContestProvider = ({ children }) => {
 
 	return (
 		<ContestContext.Provider
-			value={{ contest, contestClickSlider, curContest, color, handleCalendar }}
+			value={{
+				contest,
+				contestClickSlider,
+				curContest,
+				color,
+				handleCalendar,
+				showAllContests,
+			}}
 		>
 			{!isLoading && children}
 		</ContestContext.Provider>

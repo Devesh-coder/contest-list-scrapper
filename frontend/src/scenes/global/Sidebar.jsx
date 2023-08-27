@@ -11,10 +11,13 @@ import { useContext } from 'react'
 const Item = ({ title, to, icon, selected, setSelected, item }) => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
-	const { contestClickSlider } = useContext(ContestContext)
+	const { contestClickSlider, showAllContests } = useContext(ContestContext)
 
 	return (
 		<MenuItem
+			{...(showAllContests && title === 'All Contests'
+				? setSelected(title)
+				: null)}
 			active={selected === title}
 			style={{
 				color: colors.grey[100],
@@ -76,6 +79,18 @@ const Sidebar = () => {
 							</Box>
 						</Box>
 					)}
+
+					<Box paddingLeft={isCollapsed ? undefined : '10%'} fontSize='1.1rem'>
+						<Item
+							fontSize='2rem'
+							item={'All Contests'}
+							title={'All Contests'}
+							// to={`/${item.contestName}`}
+							icon={<HomeOutlinedIcon />}
+							selected={selected}
+							setSelected={setSelected}
+						/>
+					</Box>
 
 					<Box paddingLeft={isCollapsed ? undefined : '10%'} fontSize='1.1rem'>
 						{contest.map((item) => (

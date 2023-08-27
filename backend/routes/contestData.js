@@ -8,11 +8,14 @@ const REDIS_PORT = process.env.PORT || 6379
 
 const redisClient = Redis.createClient(REDIS_PORT) // this creates a new client
 
-redisClient.connect()
-
-redisClient.on('connect', (err) => {
-	console.log('Connected to Redis')
-})
+try {
+	redisClient.connect()
+	redisClient.on('connect', (err) => {
+		console.log('Connected to Redis')
+	})
+} catch (err) {
+	console.log(err)
+}
 
 router.get('/', async (req, res) => {
 	let value = await redisClient.get('contests')

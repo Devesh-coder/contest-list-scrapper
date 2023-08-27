@@ -1,1 +1,123 @@
-[{"contestName": "GeeksForGeeks", "contests": [{"name": "GFG Weekly Coding Contest - 109", "link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-109", "startTime": "July 02, 2023 07:00 PM IST", "duration": "1.5hr"}, {"name": "Mega Job-A-Thon: Hiring Challenge for Freshers", "link": "https://practice.geeksforgeeks.org/contest/megajob-a-thon-hiring-challenge-freshers", "startTime": "July 05, 2023 08:00 PM IST", "duration": "1.5hr"}, {"name": "GFG Weekly Coding Contest - 110", "link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-110", "startTime": "July 09, 2023 07:00 PM IST", "duration": "1.5hr"}, {"name": "GFG Weekly Coding Contest - 111", "link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-111", "startTime": "July 16, 2023 07:00 PM IST", "duration": "1.5hr"}, {"name": "Mega Job-A-Thon: Hiring Challenge for Experienced....", "link": "https://practice.geeksforgeeks.org/contest/mega-job-a-thon-hiring-challenge-for-experience", "startTime": "July 21, 2023 08:00 PM IST", "duration": "1.5hr"}, {"name": "GFG Weekly Coding Contest - 112", "link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-112", "startTime": "July 23, 2023 07:00 PM IST", "duration": "1.5hr"}]}, {"contestName": "CodingNinja", "contests": [{"name": "Scholarship Test 11th to 12th July 2023", "link": "", "startTime": "Starts in 8 days", "duration": "2hr"}, {"name": "Beginner Contest 38", "link": "", "startTime": "Starts in 10 days", "duration": "2hr"}]}, {"contestName": "Codechef", "contests": [{"name": "Starters 97", "link": "https://www.codechef.com/START97", "startTime": "05 Jul 2023\nWed 20:00", "duration": "2 Hrs"}, {"name": "Starters 98", "link": "https://www.codechef.com/START98", "startTime": "12 Jul 2023\nWed 20:00", "duration": "2 Hrs"}, {"name": "Starters 99", "link": "https://www.codechef.com/START99", "startTime": "19 Jul 2023\nWed 20:00", "duration": "2 Hrs"}, {"name": "Starters 100", "link": "https://www.codechef.com/START100", "startTime": "26 Jul 2023\nWed 20:00", "duration": "2 Hrs"}]}, {"contestName": "Codeforces", "contests": [{"name": "Codeforces Round (Div. 2)", "link": "Before registration 47:43:58", "startTime": "Jul/06/2023 20:05UTC+5.5", "duration": "02:00"}, {"name": "Codeforces Round (Div. 3)", "link": "Before registration 47:43:56", "startTime": "Jul/07/2023 20:05UTC+5.5", "duration": "02:15"}, {"name": "Codeforces Round (Div. 1 + Div. 2)", "link": "Before registration 23:43:56", "startTime": "Jul/11/2023 20:05UTC+5.5", "duration": "02:00"}]}, {"contestName": "Leetcode", "contests": [{"name": "Weekly Contest 353", "link": "https://leetcode.com/contest/weekly-contest-353", "startTime": "Sunday 8:00 AM GMT+5:30", "duration": "2hr"}, {"name": "Biweekly Contest 108", "link": "https://leetcode.com/contest/biweekly-contest-108", "startTime": "Saturday 8:00 PM GMT+5:30", "duration": "2hr"}]}]
+[
+	{
+		"contestName": "CodingNinja",
+		"contests": [
+			{
+				"name": "Scholarship Test 22nd - 31st Aug'23",
+				"link": "",
+				"startTime": "Live Now",
+				"duration": "2hr"
+			},
+			{
+				"name": "Beginner Contest 42",
+				"link": "",
+				"startTime": "Starts in 9 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Monthly Contest 18",
+				"link": "",
+				"startTime": "Starts in 27 days",
+				"duration": "2hr"
+			},
+			{
+				"name": "Striver Binary Search Contest",
+				"link": "",
+				"startTime": "Live Now",
+				"duration": "2hr"
+			}
+		]
+	},
+	{
+		"contestName": "Codechef",
+		"contests": [
+			{
+				"name": "August Long 2023 (Unrated)",
+				"link": "https://www.codechef.com/AUG23",
+				"startTime": "30 Aug 2023\nWed 12:00",
+				"duration": "12 Hrs"
+			}
+		]
+	},
+	{
+		"contestName": "GeeksForGeeks",
+		"contests": [
+			{
+				"name": "GFG Weekly Coding Contest - 118",
+				"link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-118",
+				"startTime": "September 03, 2023 07:00 PM IST",
+				"duration": "1.5hr"
+			},
+			{
+				"name": "Career Advancement Test for EWS & PWD",
+				"link": "https://practice.geeksforgeeks.org/contest/career-advancement-test-for-ews-pwd",
+				"startTime": "September 05, 2023 07:00 PM IST",
+				"duration": "1.5hr"
+			},
+			{
+				"name": "GFG Weekly Coding Contest - 119",
+				"link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-119",
+				"startTime": "September 10, 2023 07:00 PM IST",
+				"duration": "1.5hr"
+			},
+			{
+				"name": "GFG Weekly Coding Contest - 120",
+				"link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-120",
+				"startTime": "September 17, 2023 07:00 PM IST",
+				"duration": "1.5hr"
+			},
+			{
+				"name": "Job-A-Thon 22 Hiring Challange",
+				"link": "https://practice.geeksforgeeks.org/contest/job-a-thon-22-hiring-challange",
+				"startTime": "September 21, 2023 08:00 PM IST",
+				"duration": "1.5hr"
+			}
+		]
+	},
+	{
+		"contestName": "Codeforces",
+		"contests": [
+			{
+				"name": "Pinely Round 2 (Div. 1 + Div. 2)",
+				"link": "https://codeforces.com/contestRegistration/1863",
+				"startTime": "Aug/30/2023 20:05UTC+5.5",
+				"duration": "03:00"
+			},
+			{
+				"name": "Educational Codeforces Round 154 (Rated for Div. 2)",
+				"link": "Before registration 03:13:51",
+				"startTime": "Aug/31/2023 20:05UTC+5.5",
+				"duration": "02:00"
+			},
+			{
+				"name": "COMPFEST 15 - Preliminary Online Mirror (Unrated, ICPC Rules, Teams Preferred)",
+				"link": "Before registration 43:18:51",
+				"startTime": "Sep/03/2023 17:35UTC+5.5",
+				"duration": "05:00"
+			},
+			{
+				"name": "Codeforces Round (Div. 2)",
+				"link": "Before registration 13 days",
+				"startTime": "Sep/11/2023 20:05UTC+5.5",
+				"duration": "02:00"
+			}
+		]
+	},
+	{
+		"contestName": "Leetcode",
+		"contests": [
+			{
+				"name": "Weekly Contest 361",
+				"link": "https://leetcode.com/contest/weekly-contest-361",
+				"startTime": "Sunday 8:00 AM GMT+5:30",
+				"duration": "2hr"
+			},
+			{
+				"name": "Biweekly Contest 112",
+				"link": "https://leetcode.com/contest/biweekly-contest-112",
+				"startTime": "Saturday 8:00 PM GMT+5:30",
+				"duration": "2hr"
+			}
+		]
+	}
+]
