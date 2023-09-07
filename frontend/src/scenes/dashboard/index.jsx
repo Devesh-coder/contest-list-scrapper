@@ -2,15 +2,31 @@ import ContestContext from '../../context/ContestContext'
 import { useContext } from 'react'
 import Card from '../../components/Card'
 
-const Dashboard = () => {
-	const { curContest } = useContext(ContestContext)
-	console.log(curContest.contests)
+const Dashboard = ({ Contest }) => {
+	let { curContest, contestLogoMap, isPhoneDisplay } = useContext(ContestContext)
+	if (Contest != null) {
+		curContest = Contest
+	}
+	// console.log('inside ', curContest.contestName)
 
 	return (
 		<>
+			<br />
 			<div style={{ width: '120%', margin: 'auto' }}>
 				<div className='ml-[15%] mt-10 mr-[10%] '>
-					<h1 className='text-3xl font-bold mb-10'>{curContest.contestName}</h1>
+					<h1 className='text-2xl font-bold mb-10'>
+						<div style={{ display: 'flex', textAlign: 'center' }}>
+							<div
+								className='mr-[5%]'
+								style={{ fontSize: isPhoneDisplay ? '1.5rem' : '2rem' }}
+							>
+								{contestLogoMap.get(curContest.contestName)}
+							</div>
+							<div style={{ fontSize: isPhoneDisplay ? '1.2rem' : '2rem' }}>
+								{curContest.contestName}
+							</div>
+						</div>
+					</h1>
 					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-[40%]  '>
 						{curContest.contests &&
 							curContest.contests.map((contest) => (
@@ -27,6 +43,8 @@ const Dashboard = () => {
 							))}
 					</div>
 				</div>
+				{/* <br /> */}
+				<hr style={{ widht: '150%', marginLeft: '8%' }} />
 			</div>
 		</>
 	)

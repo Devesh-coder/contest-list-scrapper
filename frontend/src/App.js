@@ -10,6 +10,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { ColorModeContext, useMode } from './theme'
 import ContestContext from './context/ContestContext'
 import { useContext } from 'react'
+import DisplayAllContests from './components/DisplayAllContests'
 
 function App() {
 	const [theme, colorMode] = useMode()
@@ -20,12 +21,10 @@ function App() {
 		<ColorModeContext.Provider value={colorMode}>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
-				<div className='app'>
+				<div className='app' style={{ overflow: 'hidden' }}>
 					<Sidebar isSidebar={isSidebar} />
 					<main className='content'>
-						{showAllContests ? 'completed' : <Dashboard />}
-
-						{/* <Dashboard /> */}
+						{showAllContests ? <DisplayAllContests /> : <Dashboard />}
 
 						{/* <Routes>
 								<Route path='/' element={<Dashboard />} />

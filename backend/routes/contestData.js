@@ -8,8 +8,8 @@ const REDIS_PORT = process.env.PORT || 6379
 
 const redisClient = Redis.createClient(REDIS_PORT) // this creates a new client
 
+redisClient.connect()
 try {
-	redisClient.connect()
 	redisClient.on('connect', (err) => {
 		console.log('Connected to Redis')
 	})

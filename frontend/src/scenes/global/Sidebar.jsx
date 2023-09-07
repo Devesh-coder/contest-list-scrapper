@@ -1,17 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar'
 import { Box, IconButton, Typography, useTheme } from '@mui/material'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import 'react-pro-sidebar/dist/css/styles.css'
 import { tokens } from '../../theme'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import ContestContext from '../../context/ContestContext'
 import { useContext } from 'react'
 
-const Item = ({ title, to, icon, selected, setSelected, item }) => {
+const Item = ({
+	title,
+	to,
+	icon,
+	selected,
+	setSelected,
+	item,
+	isCollapsed,
+	handleClick,
+}) => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
-	const { contestClickSlider, showAllContests } = useContext(ContestContext)
+	const { contestClickSlider, showAllContests, isPhoneDisplay } =
+		useContext(ContestContext)
 
 	return (
 		<MenuItem
@@ -25,6 +36,11 @@ const Item = ({ title, to, icon, selected, setSelected, item }) => {
 			onClick={() => {
 				setSelected(title)
 				contestClickSlider(item)
+				if (!isCollapsed && isPhoneDisplay) {
+					isCollapsed = 1
+					console.log(isCollapsed)
+				}
+				handleClick(isCollapsed)
 			}}
 			icon={icon}
 		>
@@ -37,9 +53,15 @@ const Item = ({ title, to, icon, selected, setSelected, item }) => {
 const Sidebar = () => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
-	const [isCollapsed, setIsCollapsed] = useState(false)
+	const { contest, contestLogoMap, isPhoneDisplay } = useContext(ContestContext)
+	const [isCollapsed, setIsCollapsed] = useState(0)
 	const [selected, setSelected] = useState('Dashboard')
-	const { contest } = useContext(ContestContext)
+
+	useEffect(() => {
+		if (isPhoneDisplay != isCollapsed) {
+			setIsCollapsed(isPhoneDisplay)
+		}
+	}, [isPhoneDisplay])
 
 	return (
 		<Box
@@ -65,22 +87,36 @@ const Sidebar = () => {
 			<ProSidebar collapsed={isCollapsed}>
 				{/* LOGO AND MENU ICON */}
 				<Menu iconShape='square'>
-					{!isCollapsed && (
-						<Box mb='100px'>
-							<Box textAlign='center'>
-								<Typography
-									variant='h2'
-									color={colors.grey[100]}
-									fontWeight='bold'
-									sx={{ m: '10px 0 0 0' }}
-								>
-									Contests
-								</Typography>
+					<MenuItem
+						onClick={() => {
+							if (isCollapsed == 1) setIsCollapsed(0)
+							else setIsCollapsed(1)
+						}}
+						icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+						style={{
+							paddingTop: isCollapsed ? '20px' : undefined,
+							marginBottom: isCollapsed ? '100px' : undefined,
+							margin: '20px 0 20px 0',
+							color: colors.grey[100],
+						}}
+					>
+						{!isCollapsed && (
+							<Box mb='100px'>
+								<Box textAlign='center'>
+									<Typography
+										variant='h2'
+										color={colors.grey[100]}
+										fontWeight='bold'
+										sx={{ m: '25px 0 0 0' }}
+									>
+										Contest Arena
+									</Typography>
+								</Box>
 							</Box>
-						</Box>
-					)}
+						)}
+					</MenuItem>
 
-					<Box paddingLeft={isCollapsed ? undefined : '10%'} fontSize='1.1rem'>
+					<Box paddingLeft={isCollapsed ? undefined : '10%'} fontSize='1.5rem'>
 						<Item
 							fontSize='2rem'
 							item={'All Contests'}
@@ -89,19 +125,23 @@ const Sidebar = () => {
 							icon={<HomeOutlinedIcon />}
 							selected={selected}
 							setSelected={setSelected}
+							isCollapsed={isCollapsed}
+							handleClick={(value) => setIsCollapsed(value)}
 						/>
 					</Box>
 
-					<Box paddingLeft={isCollapsed ? undefined : '10%'} fontSize='1.1rem'>
+					<Box paddingLeft={isCollapsed ? undefined : '10%'} fontSize='1.5rem'>
 						{contest.map((item) => (
 							<Item
 								fontSize='2rem'
 								item={item}
 								title={item.contestName}
 								// to={`/${item.contestName}`}
-								icon={<HomeOutlinedIcon />}
+								icon={contestLogoMap.get(item.contestName)}
 								selected={selected}
 								setSelected={setSelected}
+								isCollapsed={isCollapsed}
+								handleClick={(value) => setIsCollapsed(value)}
 							/>
 						))}
 					</Box>

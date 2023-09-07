@@ -1,5 +1,10 @@
 import { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
+import { SiCodechef } from 'react-icons/si'
+import { SiLeetcode } from 'react-icons/si'
+import { SiCodingninjas } from 'react-icons/si'
+import { SiGeeksforgeeks } from 'react-icons/si'
+import { SiCodeforces } from 'react-icons/si'
 
 const ContestContext = createContext()
 
@@ -25,9 +30,18 @@ export const ContestProvider = ({ children }) => {
 		},
 	]
 
+	const contestLogoMap = new Map([
+		['CodingNinja', <SiCodingninjas />],
+		['GeeksForGeeks', <SiGeeksforgeeks />],
+		['Codechef', <SiCodechef />],
+		['Leetcode', <SiLeetcode />],
+		['Codeforces', <SiCodeforces />],
+	])
+
 	// Onclicking the contest name on the sidebar
 	const contestClickSlider = (contest) => {
 		if (contest != 'All Contests') {
+			// console.log(contestLogoMap.get(contest.contestName))
 			setCurContest(contest)
 			setShowAllContests(false)
 		} else {
@@ -59,6 +73,29 @@ export const ContestProvider = ({ children }) => {
 		setIsLoading(false)
 	}, [])
 
+	const [screenSize, getDimension] = useState({
+		dynamicWidth: window.innerWidth,
+	})
+	const setDimension = () => {
+		getDimension({
+			dynamicWidth: window.innerWidth,
+		})
+	}
+
+	useEffect(() => {
+		window.addEventListener('resize', setDimension)
+
+		return () => {
+			window.removeEventListener('resize', setDimension)
+		}
+	}, [screenSize])
+
+	let isPhoneDisplay = 0
+	if (screenSize.dynamicWidth <= 1000) {
+		isPhoneDisplay = 1
+		// console.log(isPhoneDisplay)
+	}
+
 	return (
 		<ContestContext.Provider
 			value={{
@@ -68,6 +105,8 @@ export const ContestProvider = ({ children }) => {
 				color,
 				handleCalendar,
 				showAllContests,
+				contestLogoMap,
+				isPhoneDisplay,
 			}}
 		>
 			{!isLoading && children}

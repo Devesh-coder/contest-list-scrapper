@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faCalendarPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Card({ link, title, start, duration, contest }) {
-	const { color, handleCalendar } = useContext(ContestContext)
+	const { color, handleCalendar, isPhoneDisplay } = useContext(ContestContext)
 	// console.log(color)
 
 	return (
@@ -12,12 +12,14 @@ function Card({ link, title, start, duration, contest }) {
 			style={{
 				backgroundColor: '#F2F0F0',
 				color: 'black !important',
+				width: isPhoneDisplay ? '14rem' : '16rem',
+				height: isPhoneDisplay ? '18rem' : '16.5rem',
 			}}
-			className='hover:drop-shadow-2xl w-64 h-64 min-h-full max-h-100 bg-base-100 border-solid border-2 p-4 rounded-md '
+			className='hover:drop-shadow-2xl min-h-full max-h-100 bg-base-100 border-solid border-2 p-4 rounded-md '
 		>
 			<span
 				style={{
-					marginLeft: '200px',
+					marginLeft: '11rem',
 					fontSize: '1.25rem',
 					cursor: 'pointer',
 				}}
