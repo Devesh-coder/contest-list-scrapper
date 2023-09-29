@@ -3,6 +3,7 @@ const router = express.Router()
 const Contest = require('../models/contest')
 const fs = require('fs')
 const Redis = require('redis')
+const { createClient } = require('redis')
 
 const REDIS_PORT = process.env.PORT || 6379
 
@@ -16,6 +17,10 @@ try {
 } catch (err) {
 	console.log(err)
 }
+
+// redisClient.on('error', (err) => console.log('Redis Client Error', err))
+
+// redisClient.connect()
 
 router.get('/', async (req, res) => {
 	let value = await redisClient.get('contests')

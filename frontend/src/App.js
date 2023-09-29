@@ -11,6 +11,7 @@ import { ColorModeContext, useMode } from './theme'
 import ContestContext from './context/ContestContext'
 import { useContext } from 'react'
 import DisplayAllContests from './components/DisplayAllContests'
+import GoogleAuth from './components/GoogleAuth'
 
 function App() {
 	const [theme, colorMode] = useMode()
@@ -19,6 +20,7 @@ function App() {
 
 	return (
 		<ColorModeContext.Provider value={colorMode}>
+			<GoogleAuth />
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<div className='app' style={{ overflow: 'hidden' }}>

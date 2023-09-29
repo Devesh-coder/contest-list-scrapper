@@ -4,15 +4,18 @@ import './index.css'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { ContestProvider } from './context/ContestContext'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
 	// <React.StrictMode>
 
-	<BrowserRouter>
-		<ContestProvider>
-			<App />
-		</ContestProvider>
-	</BrowserRouter>,
+	<GoogleOAuthProvider clientId='885497924263-n9csh64s4udda2re4e37bv9fvk6j32vh.apps.googleusercontent.com'>
+		<BrowserRouter>
+			<ContestProvider>
+				<App />
+			</ContestProvider>
+		</BrowserRouter>
+	</GoogleOAuthProvider>,
 	// </React.StrictMode>,
 )

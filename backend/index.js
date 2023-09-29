@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const authRoute = require('./routes/authRoute')
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -14,6 +15,7 @@ const calendarRoute = require('./config/google-calender/calendar')
 
 app.use('/contests', contestsRoute)
 app.use('/google', calendarRoute)
+app.use('/auth', authRoute)
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)
