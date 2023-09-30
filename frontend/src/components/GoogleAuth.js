@@ -13,10 +13,11 @@ function GoogleAuth() {
 	// Authorization Code
 	const login = useGoogleLogin({
 		onSuccess: async ({ code }) => {
-			const tokens = await axios.post('http://localhost:5000/auth/google', {
+			const jwtToken = await axios.post('http://localhost:5000/auth/google', {
 				code,
 			})
-			setTokens(tokens.data)
+			setTokens(jwtToken)
+			localStorage.setItem('jwt', json.Stringify(jwtToken))
 		},
 		flow: 'auth-code',
 	})
