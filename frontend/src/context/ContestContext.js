@@ -14,6 +14,7 @@ export const ContestProvider = ({ children }) => {
 	const [curContest, setCurContest] = useState({})
 	const [color, setColor] = useState('none')
 	const [showAllContests, setShowAllContests] = useState(true)
+	const [isLogged, setIsLogged] = useState(false)
 
 	const background = [
 		{
@@ -66,21 +67,35 @@ export const ContestProvider = ({ children }) => {
 		const fetchData = async () => {
 			const data = await axios.get('http://localhost:5000/contests')
 
-			axios
-				.get('http://localhost:5000/auth/verify', { withCredentials: true })
-				.then((response) => {
-					console.log(response.data)
-				})
-				.catch((error) => {
-					console.error('something not write', error)
-				})
-
 			setContest(data.data)
 			console.log(data.data)
 		}
 		fetchData()
 
+		let sessionStatus = true
+		const verifyToken = async () => {
+			axios
+				.get('http://localhost:5000/auth/verify', { withCredentials: true })
+				.then((response) => {
+					console.log(response.data)
+				})
+				.catch((err) => {
+					sessionStatus = false
+					console.log(err.response.data, sessionStatus)
+					if(localStorage.getItem('loggedIn') != null) {
+						localStorage.removeItem('loggedIn')
+						console.log('removed and inside of session status condition')
+						setIsLogged(false)
+					}
+				})
+		}
+		verifyToken()
+
 		setIsLoading(false)
+
+		if (localStorage.getItem('loggedIn') && !isLogged && sessionStatus) {
+			setIsLogged(true)
+		}
 	}, [])
 
 	const [screenSize, getDimension] = useState({
@@ -106,6 +121,22 @@ export const ContestProvider = ({ children }) => {
 		// console.log(isPhoneDisplay)
 	}
 
+	// userLogging
+	// const [user, setUser] = useState(null)
+
+	const loginHandler = async () => {
+		localStorage.setItem('loggedIn', true)
+		setIsLogged(true)
+		// setUser(jwtToken)
+	}
+
+	const logoutHandler = () => {
+		axios.get('http://localhost:5000/auth/logout', { withCredentials: true })
+		localStorage.removeItem('loggedIn')
+		setIsLogged(false)
+		// setUser(null)
+	}
+
 	return (
 		<ContestContext.Provider
 			value={{
@@ -117,6 +148,10 @@ export const ContestProvider = ({ children }) => {
 				showAllContests,
 				contestLogoMap,
 				isPhoneDisplay,
+				loginHandler,
+				logoutHandler,
+				isLogged,
+				// user,
 			}}
 		>
 			{!isLoading && children}
