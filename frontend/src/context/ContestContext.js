@@ -65,6 +65,16 @@ export const ContestProvider = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const data = await axios.get('http://localhost:5000/contests')
+
+			axios
+				.get('http://localhost:5000/auth/verify', { withCredentials: true })
+				.then((response) => {
+					console.log(response.data)
+				})
+				.catch((error) => {
+					console.error('something not write', error)
+				})
+
 			setContest(data.data)
 			console.log(data.data)
 		}

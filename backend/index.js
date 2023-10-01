@@ -4,7 +4,12 @@ const authRoute = require('./routes/authRoute')
 const cookieParser = require('cookie-parser')
 const app = express()
 
-app.use(cors())
+app.use(
+	cors({
+		origin: 'http://localhost:3000', // Adjust this to match your frontend URL
+		credentials: true,
+	}),
+)
 app.use(express.json())
 app.use(cookieParser())
 
@@ -21,8 +26,6 @@ const verifyToken = require('./controller/verifyToken')
 app.use('/contests', contestsRoute)
 app.use('/google', calendarRoute)
 app.use('/auth', authRoute)
-
-app.use('/test', testRoute)
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`)

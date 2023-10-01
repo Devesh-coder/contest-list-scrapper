@@ -8,16 +8,27 @@ function GoogleAuth() {
 
 	useEffect(() => {
 		console.log(tokens)
+		const verifyToken = async () => {
+			const authority = await axios.get('http://localhost:5000/auth/verify', {
+				withCredentials: true,
+			})
+			console.log(authority.data)
+		}
+		verifyToken()
 	}, [tokens])
 
 	// Authorization Code
 	const login = useGoogleLogin({
 		onSuccess: async ({ code }) => {
-			const jwtToken = await axios.post('http://localhost:5000/auth/google', {
-				code,
-			})
+			const jwtToken = await axios.post(
+				'http://localhost:5000/auth/google',
+				{
+					code,
+				},
+				{ withCredentials: true },
+			)
 			setTokens(jwtToken)
-			localStorage.setItem('jwt', json.Stringify(jwtToken))
+			localStorage.setItem('loggedIn', true)
 		},
 		flow: 'auth-code',
 	})
@@ -42,6 +53,7 @@ function GoogleAuth() {
 		<button
 			onClick={() => {
 				googleLogout()
+				axios.get('http://localhost:5000/auth/logout', { withCredentials: true })
 				setTokens(null)
 			}}
 		>
