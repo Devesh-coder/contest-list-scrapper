@@ -1,10 +1,7 @@
 const dotenv = require('dotenv')
-dotenv.config()
 const { google } = require('googleapis')
-const express = require('express')
-const router = express.Router()
-const jwt = require('jsonwebtoken')
-const { findUser } = require('../../controller/userCredentials')
+const { findUser } = require('./userCredentials')
+dotenv.config()
 
 const oauth2Client = new google.auth.OAuth2(
 	process.env.CLIENT_ID,
@@ -12,7 +9,7 @@ const oauth2Client = new google.auth.OAuth2(
 	process.env.REDIRECT_URI,
 )
 
-router.post('/', async (req, res) => {
+const createEvent = async (req, res) => {
 	try {
 		const { name, link, starTime, duration } = req.body.contest
 		const token = req.cookies.jwtToken
@@ -53,8 +50,8 @@ router.post('/', async (req, res) => {
 		})
 		res.send(response)
 	} catch (error) {
-		next(error)
+		res.send(error)
 	}
-})
+}
 
-module.exports = router
+module.exports = createEvent

@@ -13,4 +13,11 @@ const updateUser = async (refreshToken, jwtToken) => {
 	)
 }
 
-module.exports = updateUser
+const findUser = async (jwtToken) => {
+	const { email } = jwt.decode(jwtToken)
+	console.log(email)
+
+	return await User.findOne({ email })
+}
+
+module.exports = { updateUser, findUser }

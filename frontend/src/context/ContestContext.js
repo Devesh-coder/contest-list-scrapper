@@ -5,6 +5,7 @@ import { SiLeetcode } from 'react-icons/si'
 import { SiCodingninjas } from 'react-icons/si'
 import { SiGeeksforgeeks } from 'react-icons/si'
 import { SiCodeforces } from 'react-icons/si'
+import { toast } from 'react-toastify'
 
 const ContestContext = createContext()
 
@@ -60,7 +61,18 @@ export const ContestProvider = ({ children }) => {
 
 	const handleCalendar = async (contest) => {
 		console.log('calendar', contest.contest)
-		await axios.get(`http://localhost:5000/google`)
+		await axios
+			.post(`http://localhost:5000/create-event`, contest, {
+				withCredentials: true,
+			})
+			.then((response) => {
+				console.log(response)
+				toast.success('Event added to calendar', toastSuccess)
+			})
+			.catch((err) => {
+				console.log(err.data)
+				toast.warn(err.response.data.message, toastWarning)
+			})
 	}
 
 	useEffect(() => {
@@ -78,13 +90,14 @@ export const ContestProvider = ({ children }) => {
 				.get('http://localhost:5000/auth/verify', { withCredentials: true })
 				.then((response) => {
 					console.log(response.data)
+					toast.success('User LoggedIn', toastSuccess)
 				})
 				.catch((err) => {
 					sessionStatus = false
 					console.log(err.response.data, sessionStatus)
-					if(localStorage.getItem('loggedIn') != null) {
+					if (localStorage.getItem('loggedIn') != null) {
+						toast.warn(`Session ended, ${err.response.data}`, toastWarning)
 						localStorage.removeItem('loggedIn')
-						console.log('removed and inside of session status condition')
 						setIsLogged(false)
 					}
 				})
@@ -134,7 +147,30 @@ export const ContestProvider = ({ children }) => {
 		axios.get('http://localhost:5000/auth/logout', { withCredentials: true })
 		localStorage.removeItem('loggedIn')
 		setIsLogged(false)
+		toast.success('Logout Successful', toastSuccess)
 		// setUser(null)
+	}
+
+	const toastSuccess = {
+		position: 'bottom-right',
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: 'dark',
+	}
+
+	const toastWarning = {
+		position: 'bottom-right',
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: 'dark',
 	}
 
 	return (
@@ -151,7 +187,8 @@ export const ContestProvider = ({ children }) => {
 				loginHandler,
 				logoutHandler,
 				isLogged,
-				// user,
+				toastSuccess,
+				toastWarning,
 			}}
 		>
 			{!isLoading && children}

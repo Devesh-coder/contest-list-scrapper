@@ -3,9 +3,12 @@ import { GoogleLogin, googleLogout } from '@react-oauth/google'
 import axios from 'axios'
 import { useEffect, useState, useContext } from 'react'
 import ContestContext from '../context/ContestContext'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function GoogleAuth() {
-	const { loginHandler, isLogged, logoutHandler } = useContext(ContestContext)
+	const { loginHandler, isLogged, logoutHandler, toastSuccess, toastWarning } =
+		useContext(ContestContext)
 
 	// useEffect(() => {
 	// 	console.log(tokens)
@@ -31,32 +34,39 @@ function GoogleAuth() {
 				)
 				.then((response) => {
 					console.log(response.data)
+					toast.success('Login Successful', toastSuccess)
 				})
 				.catch((err) => {
 					console.log(err)
+					toast.warn(err.message, toastWarning)
 				})
 			loginHandler()
 		},
 		flow: 'auth-code',
 	})
 
-	return !isLogged ? (
-		// <GoogleLogin
-		// 	onSuccess={login}
-		// 	onError={() => {
-		// 		console.log('Login Failed')
-		// 	}}
-		// />
-		<button onClick={login}>Login</button>
-	) : (
-		<button
-			onClick={() => {
-				logoutHandler()
-				googleLogout()
-			}}
-		>
-			Logout
-		</button>
+	return (
+		<>
+			{!isLogged ? (
+				// <GoogleLogin
+				// 	onSuccess={login}
+				// 	onError={() => {
+				// 		console.log('Login Failed')
+				// 	}}
+				// />
+				<button onClick={login}>Login</button>
+			) : (
+				<button
+					onClick={() => {
+						logoutHandler()
+						googleLogout()
+					}}
+				>
+					Logout
+				</button>
+			)}
+			<ToastContainer />
+		</>
 	)
 }
 

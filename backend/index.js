@@ -19,12 +19,12 @@ require('./config/database')
 require('./scrape')
 
 const contestsRoute = require('./routes/contestData')
-const calendarRoute = require('./config/google-calender/calendar')
+const calendarRoute = require('./routes/calendarRoute')
 const testRoute = require('./routes/testRoute')
 const verifyToken = require('./controller/verifyToken')
 
 app.use('/contests', contestsRoute)
-app.use('/google', calendarRoute)
+app.use('/create-event', calendarRoute)
 app.use('/auth', authRoute)
 
 app.listen(port, () => {
