@@ -23,6 +23,7 @@
 		"google-auth-library": "^9.0.0",
 		"googleapis": "^105.0.0",
 		"jsonwebtoken": "^9.0.2",
+		"luxon": "^3.4.3",
 		"mongoose": "^7.1.1",
 		"node-cron": "^3.0.2",
 		"puppeteer": "^19.8.3",

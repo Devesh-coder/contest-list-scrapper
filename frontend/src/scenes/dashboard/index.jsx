@@ -30,7 +30,7 @@ const Dashboard = ({ Contest }) => {
 					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-[40%]  '>
 						{curContest.contests &&
 							curContest.contests.map((contest) => (
-								<div className=' my-7'>
+								<div key={contest.name} className=' my-7'>
 									<Card
 										link={contest.link}
 										title={contest.name}

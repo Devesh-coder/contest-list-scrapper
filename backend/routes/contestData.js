@@ -9,20 +9,23 @@ const REDIS_PORT = process.env.PORT || 6379
 
 // const redisClient = createClient(REDIS_PORT) // this creates a new client
 
-const redisClient = redis.createClient()
-;(async () => {
-	await redisClient.connect()
-})()
+// --------------------------- Working -------------------------
+// const redisClient = redis.createClient()
+// ;(async () => {
+// 	await redisClient.connect()
+// })()
 
-console.log('Connecting to the Redis')
+// console.log('Connecting to the Redis')
 
-redisClient.on('ready', () => {
-	console.log('Connected!')
-})
+// redisClient.on('ready', () => {
+// 	console.log('Connected!')
+// })
 
-redisClient.on('error', (err) => {
-	console.log('Error in the Connection')
-})
+// redisClient.on('error', (err) => {
+// 	console.log('Error in the Connection')
+// })
+
+// --------------------------------
 
 // try {
 // 	redisClient.connect()
@@ -38,25 +41,25 @@ redisClient.on('error', (err) => {
 // redisClient.connect()
 
 router.get('/', async (req, res) => {
-	let value = await redisClient.get('contests')
-	if (value != null) {
-		res.status(200).send(JSON.parse(value))
-		console.log('Cache HIT')
-	} else {
+	// let value = await redisClient.get('contests')
+	// if (value != null) {
+	// 	res.status(200).send(JSON.parse(value))
+	// 	console.log('Cache HIT')
+	// } else {
+	try {
+		const contests = await Contest.find()
 		try {
-			const contests = await Contest.find()
-			try {
-				await redisClient.setEx('contests', 3600, JSON.stringify(contests))
-				console.log('Cache MISS')
-			} catch (err) {
-				console.log(err)
-			}
-
-			res.send(contests)
+			await redisClient.setEx('contests', 3600, JSON.stringify(contests))
+			console.log('Cache MISS')
 		} catch (err) {
-			res.status(500).send({ message: 'error aaya bhadwe', err: err })
+			console.log(err)
 		}
+
+		res.send(contests)
+	} catch (err) {
+		res.status(500).send({ message: 'error aaya bhadwe', err: err })
 	}
+	// }
 })
 
 module.exports = router

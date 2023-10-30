@@ -22,7 +22,7 @@ function DisplayAllContests() {
 			</div>
 
 			{contest.map((curContest) => (
-				<Dashboard Contest={curContest} />
+				<Dashboard key={curContest._id} Contest={curContest} />
 			))}
 		</div>
 	)

@@ -35,12 +35,12 @@ function GoogleAuth() {
 				.then((response) => {
 					console.log(response.data)
 					toast.success('Login Successful', toastSuccess)
+					loginHandler()
 				})
 				.catch((err) => {
 					console.log(err)
 					toast.warn(err.message, toastWarning)
 				})
-			loginHandler()
 		},
 		flow: 'auth-code',
 	})

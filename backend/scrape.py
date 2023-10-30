@@ -11,6 +11,7 @@ import sys
 import ast  # for converting string to dict
 
 op = webdriver.ChromeOptions()
+op.add_argument('--ignore-certificate-errors')
 op.add_argument('headless')
 op.add_argument('window-size=1200x600')  # setting window size is optional
 
@@ -41,7 +42,7 @@ def gfg():
             (By.CLASS_NAME, "eventsLanding_allEventsContainer__e8bYf")))
         contests = element.find_elements(
             By.ID, "eventsLanding_eachEventContainer__O5VyK")
-        # print(len(contests))
+        print(len(contests))
 
         gfg_contest = []
 
@@ -54,13 +55,15 @@ def gfg():
             contest_name = date[2].text
             contest_duration = "1.5hr"
 
+            print(contest_name, contest_link, contest_date )
+
             gfg_contest.append(contest_schema(
                 contest_name, contest_link, contest_date + " " + contest_start_time, contest_duration))
         return gfg_contest
 
     except TimeoutException:
         print("Element not found or not visible")
-        # print('Inside GFG \n')
+        print('Inside GFG \n')
 
 
 def codingNinja():
@@ -76,12 +79,14 @@ def codingNinja():
         page = WebDriverWait(driver, 7).until(EC.visibility_of_element_located(
             (By.CLASS_NAME, "live-and-upcoming-contests")))
         upcoming_contests = page.find_elements(By.CLASS_NAME, "card-body")
+        print(len(upcoming_contests))
         for contest in upcoming_contests:
             contest_name = contest.find_element(By.CLASS_NAME, "heading").text
             contest_start_time = contest.find_element(
                 By.CLASS_NAME, "notify").text
             ninja_data.append(contest_schema(
                 contest_name, "", contest_start_time, "2hr"))
+            print(contest_name, contest_start_time)
 
         return ninja_data
 
@@ -109,6 +114,7 @@ def codechef():
         contests = upcoming_contests.find_elements(By.TAG_NAME, "tr")
 
         codechef_data = []
+        print(len(contests))
 
         for contest in contests:
             curr_contest = contest.find_elements(By.TAG_NAME, "td")
@@ -120,6 +126,7 @@ def codechef():
 
             codechef_data.append(contest_schema(
                 contest_name, contest_link, contest_start_time, contest_duration))
+            print(contest_name, contest_link, contest_start_time, contest_duration)
         return codechef_data
 
     except TimeoutException:
@@ -146,6 +153,8 @@ def leetcode():
         print(len(upcoming_contests), "upcoming contests", upcoming_contests)
         leetcode_data = []
 
+        print(len(upcoming_contests))
+
         for contest in upcoming_contests:
             contest_link = contest.find_element(
                 By.TAG_NAME, "a").get_attribute("href")
@@ -155,7 +164,7 @@ def leetcode():
             contest_start_time = contest.find_element(
                 By.CLASS_NAME, "text-label-2 ").text
             contest_duration = "2hr"
-            # print(contest_name, contest_start_time, contest_duration)
+            print(contest_name, contest_start_time, contest_duration)
 
             leetcode_data.append(contest_schema(
                 contest_name, contest_link, contest_start_time, contest_duration))
@@ -199,8 +208,8 @@ def codeforces():
                 except:
                     contest_link = cur_contest[5].text
 
-                # print(contest_name, contest_start_time,
-                #       contest_duration, contest_link)
+                print(contest_name, contest_start_time,
+                      contest_duration, contest_link)
 
                 codeforces_data.append(contest_schema(
                     contest_name, contest_link, contest_start_time, contest_duration))

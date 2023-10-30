@@ -6,6 +6,7 @@ import { SiCodingninjas } from 'react-icons/si'
 import { SiGeeksforgeeks } from 'react-icons/si'
 import { SiCodeforces } from 'react-icons/si'
 import { toast } from 'react-toastify'
+import dateConfig from '../config/dateConfig'
 
 const ContestContext = createContext()
 
@@ -80,6 +81,7 @@ export const ContestProvider = ({ children }) => {
 			const data = await axios.get('http://localhost:5000/contests')
 
 			setContest(data.data)
+			dateConfig(data.data)
 			console.log(data.data)
 		}
 		fetchData()

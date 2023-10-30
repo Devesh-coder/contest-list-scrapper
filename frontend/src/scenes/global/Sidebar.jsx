@@ -133,6 +133,7 @@ const Sidebar = () => {
 					<Box paddingLeft={isCollapsed ? undefined : '10%'} fontSize='1.5rem'>
 						{contest.map((item) => (
 							<Item
+								key={item.contestName}
 								fontSize='2rem'
 								item={item}
 								title={item.contestName}
