@@ -16,8 +16,7 @@ const dateConfig = (contest) => {
 	contest[0].contests.map((item) => {
 		const dateVal = DateTime.fromFormat(item.startTime, 'dd LLL yyyy\nEEE hh:mm')
 		const durationVal = Duration.fromObject({
-			hours: item.durationHours,
-			minutes: item.durationMinutes,
+			hours: '2',
 		})
 		console.log(
 			'codechef \n',
@@ -26,7 +25,10 @@ const dateConfig = (contest) => {
 			dateVal.toLocaleString(DateTime.DATETIME_FULL),
 			'\n',
 			durationVal.toISO(),
+			'\n',
+			durationVal.toFormat('hh:mm'),
 		)
+		item.startTime = dateVal
 	})
 
 	// codeforces
@@ -50,6 +52,7 @@ const dateConfig = (contest) => {
 			'\n',
 			durationVal.toISO(),
 		)
+		item.startTime = dateVal
 	})
 
 	// coding ninja
@@ -67,6 +70,7 @@ const dateConfig = (contest) => {
 			'\n',
 			durationVal.toISO(),
 		)
+		item.startTime = dateVal
 	})
 
 	// geeksforgeeks
@@ -85,6 +89,7 @@ const dateConfig = (contest) => {
 			'\n',
 			durationVal.toISO(),
 		)
+		item.startTime = dateVal
 
 		// const formattedDate = format(parsedDate, 'MMMM dd, yyyy hh:mm a ZZZZ')
 

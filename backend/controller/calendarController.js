@@ -10,14 +10,17 @@ const oauth2Client = new google.auth.OAuth2(
 )
 
 const createEvent = async (req, res) => {
+	console.log(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
 	try {
-		const { name, link, starTime, duration } = req.body.contest
+		const { name, link, startTime, duration } = req.body.contest
 		const token = req.cookies.jwtToken
 		token === undefined &&
 			res.status(401).send({ status: 'error', message: 'Please login first' })
 
 		const { refreshToken } = await findUser(token)
-		console.log(refreshToken)
+		console.log(refreshToken, 'refresh tokens')
+
+		console.log(startTime, 'time')
 
 		oauth2Client.setCredentials({ refresh_token: refreshToken })
 		const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
@@ -28,13 +31,11 @@ const createEvent = async (req, res) => {
 				colorId: 1,
 				description: link,
 				// end: {
-				// 	dateTime: new Date(
-				// 		new Date(starTime).getTime() + duration * 60 * 1000,
-				// 	).toISOString(),
+				// 	dateTime: startTime.plus({ hours: 2 }),
 				// 	timeZone: 'Asia/Kolkata',
 				// },
 				// start: {
-				// 	dateTime: new Date(starTime).toISOString(),
+				// 	dateTime: startTime,
 				// 	timeZone: 'Asia/Kolkata',
 				// },
 				start: {

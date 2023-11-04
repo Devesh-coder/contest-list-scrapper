@@ -5,10 +5,13 @@ import { useEffect, useState, useContext } from 'react'
 import ContestContext from '../context/ContestContext'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { hasGrantedAllScopesGoogle } from '@react-oauth/google'
 
 function GoogleAuth() {
 	const { loginHandler, isLogged, logoutHandler, toastSuccess, toastWarning } =
 		useContext(ContestContext)
+
+	const [scopes, setScopes] = useState({})
 
 	// useEffect(() => {
 	// 	console.log(tokens)
@@ -43,6 +46,10 @@ function GoogleAuth() {
 				})
 		},
 		flow: 'auth-code',
+		onError: (err) => {
+			console.log('error', err)
+		},
+		scope: 'https://www.googleapis.com/auth/calendar',
 	})
 
 	return (

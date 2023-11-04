@@ -16,13 +16,13 @@ const callback = asyncHandler(async (req, res) => {
 	await updateUser(tokens.refresh_token, tokens.id_token)
 
 	// const maxAge = 6 * 30 * 24 * 60 * 60 * 1000
-	const maxAge = 10 * 60 * 1000 // 10 minute
+	const maxAge = 20 * 60 * 1000 // 10 minute
 	// Ideally cookies should have the same expiry time as the jwt tokens
 	// res.cookie('refreshToken', 'actual token in cookie')
 
 	res.cookie('jwtToken', tokens.id_token, {
 		maxAge,
-		httpOnly: false,
+		httpOnly: true,
 		path: '/',
 		domain: 'localhost',
 	})

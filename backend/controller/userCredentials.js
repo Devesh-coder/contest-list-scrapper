@@ -15,7 +15,7 @@ const updateUser = async (refreshToken, jwtToken) => {
 
 const findUser = async (jwtToken) => {
 	const { email } = jwt.decode(jwtToken)
-	console.log(email)
+	console.log(email, 'inside userCredentials')
 
 	return await User.findOne({ email })
 }
