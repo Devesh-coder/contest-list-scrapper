@@ -10,6 +10,8 @@ import dateConfig from '../config/dateConfig'
 
 const ContestContext = createContext()
 
+const proxy = 'http://localhost:5000'
+
 export const ContestProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [contest, setContest] = useState([])
