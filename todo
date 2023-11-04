@@ -1,3 +1,0 @@
-Authenticate the user.
-Store their refresh token securely.
-Optionally, use JWT tokens to track the expiration of the refresh token.

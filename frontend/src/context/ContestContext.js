@@ -78,7 +78,7 @@ export const ContestProvider = ({ children }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await axios.get('http://localhost:5000/contests')
+			const data = await axios.get(`${proxy}/contests`)
 
 			setContest(data.data)
 			dateConfig(data.data)
@@ -89,7 +89,10 @@ export const ContestProvider = ({ children }) => {
 		let sessionStatus = true
 		const verifyToken = async () => {
 			axios
-				.get('http://localhost:5000/auth/verify', { withCredentials: true })
+				.get(`${proxy}/auth/verify`, {
+					withCredentials: true,
+					referrerPolicy: 'no-referrer-when-downgrade',
+				})
 				.then((response) => {
 					console.log(response.data)
 					toast.success('User LoggedIn', toastSuccess)
@@ -146,7 +149,7 @@ export const ContestProvider = ({ children }) => {
 	}
 
 	const logoutHandler = () => {
-		axios.get('http://localhost:5000/auth/logout', { withCredentials: true })
+		axios.get(`${proxy}/auth/logout`, { withCredentials: true })
 		localStorage.removeItem('loggedIn')
 		setIsLogged(false)
 		toast.success('Logout Successful', toastSuccess)
