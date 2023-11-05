@@ -14,7 +14,7 @@ cron.schedule('50 * * * *', async () => {
 		console.log('data scraped and fetched')
 
 		await contestUpload()
-		redisClient.FLUSHALL(function (err, succeeded) {
+		await redisClient.flushAll(function (err, succeeded) {
 			console.log(succeeded) // will be true if successfull
 		})
 	} catch (error) {
