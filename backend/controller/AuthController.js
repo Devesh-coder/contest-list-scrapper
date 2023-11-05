@@ -17,7 +17,7 @@ const callback = asyncHandler(async (req, res) => {
 	await updateUser(tokens.refresh_token, tokens.id_token)
 
 	// const maxAge = 6 * 30 * 24 * 60 * 60 * 1000
-	const maxAge = 60 * 60 * 1000 // 10 minute
+	const maxAge = 1 * 60 * 1000 // 10 minute
 	// Ideally cookies should have the same expiry time as the jwt tokens
 	// res.cookie('refreshToken', 'actual token in cookie')
 
@@ -40,7 +40,15 @@ const refreshToken = asyncHandler(async (req, res) => {
 		req.body.refreshToken,
 	)
 	const { credentials } = await user.refreshAccessToken() // optain new tokens
-	res.json(credentials)
+	res.json({ status: true, message: credentials })
 })
+
+// const refreshToken = async (refreshToken) => {
+// 	const user = new UserRefreshClient(clientId, clientSecret, refreshToken)
+// 	const { credentials } = await user.refreshAccessToken() // optain new tokens
+// 	console.log(credentials, '////////cred\\\\\\\\')
+// 	return credentials
+// 	// res.json(credentials)
+// }
 
 module.exports = { callback, refreshToken }

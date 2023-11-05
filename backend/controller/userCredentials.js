@@ -17,7 +17,11 @@ const findUser = async (jwtToken) => {
 	const { email } = jwt.decode(jwtToken)
 	console.log(email, 'inside userCredentials')
 
+	return findUserByEmail(email)
+}
+
+const findUserByEmail = async (email) => {
 	return await User.findOne({ email })
 }
 
-module.exports = { updateUser, findUser }
+module.exports = { updateUser, findUser, findUserByEmail }

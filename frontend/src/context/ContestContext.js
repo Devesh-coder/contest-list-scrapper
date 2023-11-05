@@ -97,13 +97,17 @@ export const ContestProvider = ({ children }) => {
 				})
 				.then((response) => {
 					console.log(response.data)
-					toast.success('User LoggedIn', toastSuccess)
+					toast.success('User Signed In', toastSuccess)
 				})
 				.catch((err) => {
 					sessionStatus = false
-					console.log(err.response.data, sessionStatus)
+					console.log(
+						err.response.data.message,
+						err.response.data.status,
+						sessionStatus,
+					)
 					if (localStorage.getItem('loggedIn') != null) {
-						toast.warn(`Session ended, ${err.response.data}`, toastWarning)
+						toast.warn(`Session ended, ${err.response.data.message}`, toastWarning)
 						localStorage.removeItem('loggedIn')
 						setIsLogged(false)
 					}
