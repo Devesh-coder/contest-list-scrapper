@@ -14,6 +14,7 @@ const createEvent = async (req, res) => {
 	try {
 		const { name, link, startTime, duration } = req.body.contest
 		const token = req.cookies.jwtToken
+		// console.log(token, 'token')
 		token === undefined &&
 			res.status(401).send({ status: 'error', message: 'Please login first' })
 
@@ -51,7 +52,7 @@ const createEvent = async (req, res) => {
 		})
 		res.send(response)
 	} catch (error) {
-		res.send(error)
+		res.json({ error: error.message })
 	}
 }
 

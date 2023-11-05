@@ -10,8 +10,11 @@ const frontend_url = process.env.FRONTEND_URL
 console.log(frontend_url)
 app.use(
 	cors({
-		// origin: frontend_url != '' ? frontend_url : 'http://localhost:3000', // Adjust this to match your frontend URL
-		origin: '*', // Allow from anywhere
+		origin: {
+			'http://localhost:3000': true,
+			frontend_url: true,
+		},
+		// origin: '*', // Allow from anywhere
 		credentials: true,
 	}),
 )

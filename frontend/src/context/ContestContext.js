@@ -10,8 +10,6 @@ import dateConfig from '../config/dateConfig'
 
 const ContestContext = createContext()
 
-const proxy = 'http://localhost:5000'
-
 export const ContestProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [contest, setContest] = useState([])
@@ -19,6 +17,8 @@ export const ContestProvider = ({ children }) => {
 	const [color, setColor] = useState('none')
 	const [showAllContests, setShowAllContests] = useState(true)
 	const [isLogged, setIsLogged] = useState(false)
+
+	const proxy = process.env.BACKEND_URL || 'http://localhost:5000'
 
 	const background = [
 		{
@@ -65,7 +65,7 @@ export const ContestProvider = ({ children }) => {
 	const handleCalendar = async (contest) => {
 		console.log('calendar', contest.contest)
 		await axios
-			.post(`http://localhost:5000/create-event`, contest, {
+			.post(`${proxy}/create-event`, contest, {
 				withCredentials: true,
 			})
 			.then((response) => {
@@ -93,7 +93,7 @@ export const ContestProvider = ({ children }) => {
 			axios
 				.get(`${proxy}/auth/verify`, {
 					withCredentials: true,
-					referrerPolicy: 'no-referrer-when-downgrade',
+					referrerPolicy: 'no-referrer',
 				})
 				.then((response) => {
 					console.log(response.data)

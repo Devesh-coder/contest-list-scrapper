@@ -9,30 +9,28 @@ const oAuth2Client = new OAuth2Client(
 	process.env.CLIENT_SECRET,
 	'postmessage',
 )
+const frontend_url = 'localhost'
 console.log(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
 
 const callback = asyncHandler(async (req, res) => {
-	try {
-		const { tokens } = await oAuth2Client.getToken(req.body.code) // exchange code for tokens
-		await updateUser(tokens.refresh_token, tokens.id_token)
+	const { tokens } = await oAuth2Client.getToken(req.body.code) // exchange code for tokens
+	await updateUser(tokens.refresh_token, tokens.id_token)
 
-		// const maxAge = 6 * 30 * 24 * 60 * 60 * 1000
-		const maxAge = 20 * 60 * 1000 // 10 minute
-		// Ideally cookies should have the same expiry time as the jwt tokens
-		// res.cookie('refreshToken', 'actual token in cookie')
+	// const maxAge = 6 * 30 * 24 * 60 * 60 * 1000
+	const maxAge = 60 * 60 * 1000 // 10 minute
+	// Ideally cookies should have the same expiry time as the jwt tokens
+	// res.cookie('refreshToken', 'actual token in cookie')
 
-		res.cookie('jwtToken', tokens.id_token, {
-			maxAge,
-			httpOnly: true,
-			path: '/',
-			domain: 'localhost',
-		})
+	res.cookie('jwtToken', tokens.id_token, {
+		maxAge,
+		httpOnly: true,
+		path: '/',
+		// domain: frontend_url,
+		secure: true,
+		sameSite: 'None',
+	})
 
-		res.json({ message: 'success', token: tokens.id_token })
-	} catch (err) {
-		console.log(err)
-		res.json({ message: 'error', error: err })
-	}
+	res.json({ message: 'success', token: tokens.id_token })
 })
 
 const refreshToken = asyncHandler(async (req, res) => {
