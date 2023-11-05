@@ -2,43 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Contest = require('../models/contest')
 const fs = require('fs')
-const redis = require('redis')
-const { createClient } = require('redis')
-
-const REDIS_PORT = process.env.PORT || 6379
-
-// const redisClient = createClient(REDIS_PORT) // this creates a new client
-
-// --------------------------- Working -------------------------
-const redisClient = redis.createClient()
-;(async () => {
-	await redisClient.connect()
-})()
-
-console.log('Connecting to the Redis')
-
-redisClient.on('ready', () => {
-	console.log('Connected!')
-})
-
-redisClient.on('error', async (err) => {
-	console.log('Error in the Connection')
-})
-
-// --------------------------------
-
-// try {
-// 	redisClient.connect()
-// 	redisClient.on('connect', (err) => {
-// 		console.log('Connected to Redis')
-// 	})
-// } catch (err) {
-// 	console.log(err)
-// }
-
-// redisClient.on('error', (err) => console.log('Redis Client Error', err))
-
-// redisClient.connect()
+const redisClient = require('../config/redis')
 
 router.get('/', async (req, res) => {
 	let value = await redisClient.get('contests')
@@ -57,7 +21,7 @@ router.get('/', async (req, res) => {
 
 			res.send(contests)
 		} catch (err) {
-			res.status(500).send({ message: 'error aaya bhadwe', err: err })
+			res.status(500).send({ message: 'Error in redis', err: err })
 		}
 	}
 })

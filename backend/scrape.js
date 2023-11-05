@@ -2,8 +2,9 @@ var cron = require('node-cron')
 const data_fetch = require('./data-fetcher/data-fetch')
 const contestUpload = require('./routes/contestsDataDB')
 
-cron.schedule('1 1 * * *', async () => {
-	// every day at 01:01
+const redisClient = require('./config/redis')
+
+cron.schedule('50 * * * *', async () => {
 	try {
 		console.log('Running every week on wednesday at 00:00')
 
@@ -13,6 +14,9 @@ cron.schedule('1 1 * * *', async () => {
 		console.log('data scraped and fetched')
 
 		await contestUpload()
+		redisClient.FLUSHALL(function (err, succeeded) {
+			console.log(succeeded) // will be true if successfull
+		})
 	} catch (error) {
 		console.error(error)
 	}
