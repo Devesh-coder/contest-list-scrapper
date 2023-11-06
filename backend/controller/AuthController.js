@@ -22,7 +22,7 @@ const callback = asyncHandler(async (req, res) => {
 	console.log(userCred, 'userCred')
 
 	// const maxAge = 6 * 30 * 24 * 60 * 60 * 1000 // 6 months
-	const maxAge = 2 * 60 * 1000 // 1 hour
+	const maxAge = 60 * 60 * 1000 // 1 hour
 	// Ideally cookies should have the same expiry time as the jwt tokens
 	// res.cookie('refreshToken', 'actual token in cookie')
 
@@ -55,8 +55,7 @@ const refreshToken = asyncHandler(async (req, res) => {
 	)
 	const { credentials } = await user.refreshAccessToken() // optain new tokens
 	console.log(credentials, 'credentials')
-	const maxAge = 2 * 60 * 1000 // 2 minutes
-	res.cookie('kuchtohai', 'mujhebhinahipata')
+	const maxAge = 60 * 60 * 1000 // 1 hour
 	res.cookie('jwtToken', credentials.id_token, {
 		maxAge,
 		httpOnly: true,
