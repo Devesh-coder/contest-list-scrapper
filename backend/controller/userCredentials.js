@@ -24,4 +24,10 @@ const findUserByEmail = async (email) => {
 	return await User.findOne({ email })
 }
 
-module.exports = { updateUser, findUser, findUserByEmail }
+const findUserById = async (uid) => {
+	const objUid = new mongoose.Types.ObjectId(uid)
+	console.log(objUid, 'inside findUserById')
+	return await User.findById(objUid)
+}
+
+module.exports = { updateUser, findUser, findUserByEmail, findUserById }

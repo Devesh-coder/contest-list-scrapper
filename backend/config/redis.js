@@ -1,11 +1,11 @@
 const redis = require('redis')
 const { createClient } = require('redis')
 
-// const REDIS_PORT = process.env.PORT || 6379
+const REDIS_PORT = process.env.PORT || 6379
 
 // const redisClient = createClient(REDIS_PORT) // this creates a new client
 
-const redisClient = redis.createClient({ legacyMode: true })
+const redisClient = redis.createClient({ REDIS_PORT, legacyMode: true })
 ;(async () => {
 	await redisClient.connect()
 })()

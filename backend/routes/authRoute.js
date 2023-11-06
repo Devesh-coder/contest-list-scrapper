@@ -5,7 +5,7 @@ const verifyToken = require('../controller/verifyToken')
 
 console.log('authRoute')
 router.post('/google', callback)
-router.post('/google/refresh-token', refreshToken)
+router.get('/google/refresh-token/:uid', refreshToken)
 router.get('/verify', verifyToken)
 router.get('/logout', logoutHandler)
 

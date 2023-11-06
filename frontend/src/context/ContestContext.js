@@ -99,17 +99,38 @@ export const ContestProvider = ({ children }) => {
 					console.log(response.data)
 					toast.success('User Signed In', toastSuccess)
 				})
-				.catch((err) => {
-					sessionStatus = false
+				.catch(async (err) => {
 					console.log(
 						err.response.data.message,
 						err.response.data.status,
 						sessionStatus,
 					)
-					if (localStorage.getItem('loggedIn') != null) {
-						toast.warn(`Session ended, ${err.response.data.message}`, toastWarning)
-						localStorage.removeItem('loggedIn')
+					if (localStorage.getItem('uid') == null) {
+						sessionStatus = false
+						toast.warn(`${err.response.data.message}`, toastWarning)
 						setIsLogged(false)
+					} else {
+						try {
+							console.log(
+								localStorage.getItem('uid'),
+								'inside user credentials in context else',
+							)
+							const credentials = await axios.get(
+								`${proxy}/auth/google/refresh-token/${localStorage.getItem('uid')}`,
+								{
+									withCredentials: true,
+									referrerPolicy: 'no-referrer',
+								},
+							)
+							console.log(credentials.data, credentials.data.message)
+							toast.success(credentials.data.message, toastSuccess)
+						} catch (err) {
+							sessionStatus = false
+							console.log(err)
+							toast.warn(`Session ended, Login Again`, toastWarning)
+							localStorage.removeItem('uid')
+							setIsLogged(false)
+						}
 					}
 				})
 		}
@@ -117,7 +138,7 @@ export const ContestProvider = ({ children }) => {
 
 		setIsLoading(false)
 
-		if (localStorage.getItem('loggedIn') && !isLogged && sessionStatus) {
+		if (localStorage.getItem('uid') != null && !isLogged && sessionStatus) {
 			setIsLogged(true)
 		}
 	}, [])
@@ -148,15 +169,15 @@ export const ContestProvider = ({ children }) => {
 	// userLogging
 	// const [user, setUser] = useState(null)
 
-	const loginHandler = async () => {
-		localStorage.setItem('loggedIn', true)
+	const loginHandler = async (uid) => {
+		localStorage.setItem('uid', uid)
 		setIsLogged(true)
 		// setUser(jwtToken)
 	}
 
 	const logoutHandler = () => {
 		axios.get(`${proxy}/auth/logout`, { withCredentials: true })
-		localStorage.removeItem('loggedIn')
+		localStorage.removeItem('uid')
 		setIsLogged(false)
 		toast.success('Logout Successful', toastSuccess)
 		// setUser(null)

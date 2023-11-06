@@ -37,8 +37,8 @@ function GoogleAuth() {
 				)
 				.then((response) => {
 					console.log(response.data)
-					toast.success('Login Successful', toastSuccess)
-					loginHandler()
+					toast.success(response.data.message, toastSuccess)
+					loginHandler(response.data.uid)
 				})
 				.catch((err) => {
 					console.log(err)

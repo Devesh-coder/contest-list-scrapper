@@ -4,8 +4,12 @@ const Contest = require('../models/contest')
 const fs = require('fs')
 const redisClient = require('../config/redis')
 
+const { promisify } = require('util')
+
+const getAsync = promisify(redisClient.get).bind(redisClient)
+
 router.get('/', async (req, res) => {
-	let value = await redisClient.get('contests')
+	let value = await getAsync('contests')
 	if (value != null) {
 		res.status(200).send(JSON.parse(value))
 		console.log('Cache HIT')

@@ -1,23 +1,28 @@
-const { OAuth2Client } = require('google-auth-library')
+const { OAuth2Client, UserRefreshClient } = require('google-auth-library')
+// const UserRefreshClient = require('./UserRefreshClient')
 const asyncHandler = require('express-async-handler')
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
-const { updateUser } = require('./userCredentials')
+const { updateUser, findUserById } = require('./userCredentials')
 
 const oAuth2Client = new OAuth2Client(
 	process.env.CLIENT_ID,
 	process.env.CLIENT_SECRET,
 	'postmessage',
 )
+
 const frontend_url = 'localhost'
 console.log(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
 
+// const cookieMaxAge = 1 * 60 * 1000 // 1 minute
+
 const callback = asyncHandler(async (req, res) => {
 	const { tokens } = await oAuth2Client.getToken(req.body.code) // exchange code for tokens
-	await updateUser(tokens.refresh_token, tokens.id_token)
+	const userCred = await updateUser(tokens.refresh_token, tokens.id_token)
+	console.log(userCred, 'userCred')
 
-	// const maxAge = 6 * 30 * 24 * 60 * 60 * 1000
-	const maxAge = 60 * 60 * 1000 // 1 hour
+	// const maxAge = 6 * 30 * 24 * 60 * 60 * 1000 // 6 months
+	const maxAge = 2 * 60 * 1000 // 1 hour
 	// Ideally cookies should have the same expiry time as the jwt tokens
 	// res.cookie('refreshToken', 'actual token in cookie')
 
@@ -26,29 +31,41 @@ const callback = asyncHandler(async (req, res) => {
 		httpOnly: true,
 		path: '/',
 		// domain: frontend_url,
-		secure: true,
-		sameSite: 'None',
+		// secure: true,
+		// sameSite: 'None',
 	})
 
-	res.json({ message: 'success', token: tokens.id_token })
+	res.json({
+		message: 'Login Successful',
+		token: tokens.id_token,
+		uid: userCred._id,
+	})
 })
 
 const refreshToken = asyncHandler(async (req, res) => {
+	const uid = req.params.uid
+	console.log(uid, 'uid')
+
+	const { refreshToken } = await findUserById(uid)
+	console.log(refreshToken, 'refreshToken')
 	const user = new UserRefreshClient(
-		clientId,
-		clientSecret,
-		req.body.refreshToken,
+		process.env.CLIENT_ID,
+		process.env.CLIENT_SECRET,
+		refreshToken,
 	)
 	const { credentials } = await user.refreshAccessToken() // optain new tokens
-	res.json({ status: true, message: credentials })
-})
+	console.log(credentials, 'credentials')
+	const maxAge = 2 * 60 * 1000 // 2 minutes
+	res.cookie('kuchtohai', 'mujhebhinahipata')
+	res.cookie('jwtToken', credentials.id_token, {
+		maxAge,
+		httpOnly: true,
+		path: '/',
+		// secure: true,
+		// sameSite: 'None',
+	})
 
-// const refreshToken = async (refreshToken) => {
-// 	const user = new UserRefreshClient(clientId, clientSecret, refreshToken)
-// 	const { credentials } = await user.refreshAccessToken() // optain new tokens
-// 	console.log(credentials, '////////cred\\\\\\\\')
-// 	return credentials
-// 	// res.json(credentials)
-// }
+	res.json({ status: true, message: 'Session Extended' })
+})
 
 module.exports = { callback, refreshToken }

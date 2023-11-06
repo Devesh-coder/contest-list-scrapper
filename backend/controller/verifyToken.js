@@ -13,19 +13,18 @@ async function verify(token) {
 	})
 	const payload = ticket.getPayload()
 	const userid = payload['sub']
-	console.log(
-		'userID : ',
-		userid,
-		'\n payload: ',
-		payload,
-		'\n //////////Inside\\\\\\\\\\',
-	)
+	// console.log(
+	// 	'userID : ',
+	// 	userid,
+	// 	'\n payload: ',
+	// 	payload,
+	// 	'\n //////////Inside\\\\\\\\\\',
+	// )
 	return payload
 }
 
 const verifyToken = async (req, res, next) => {
 	const jwtToken = req.cookies.jwtToken
-	let email = ''
 	console.log(jwt.decode(jwtToken), '\n	', 'verify token middleware')
 
 	if (!jwtToken) {
@@ -34,21 +33,11 @@ const verifyToken = async (req, res, next) => {
 	}
 
 	try {
-		const payload = await verify(jwtToken)
-		// email = payload.email
+		await verify(jwtToken)
 		res.json({ status: 'true', message: 'success' })
 	} catch (err) {
 		console.log(err)
 		res.send({ status: 'false', message: 'Session ended, Login again' })
-		// try {
-		// 	const { refreshToken } = await findUserByEmail(email)
-		// 	const cred = await refreshToken(refreshToken)
-		// 	console.log(cred)
-		// 	res.send({ status: 'true', message: 'access token refreshed' })
-		// } catch (err) {
-		// 	console.log(err)
-		// 	res.send({ status: 'false', message: 'Session ended, Login again' })
-		// }
 	}
 }
 
