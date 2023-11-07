@@ -21,7 +21,6 @@ function App() {
 
 	return (
 		<ColorModeContext.Provider value={colorMode}>
-			<GoogleAuth />
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<div className='app' style={{ overflow: 'hidden' }}>

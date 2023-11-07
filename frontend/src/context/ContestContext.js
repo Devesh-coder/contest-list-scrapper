@@ -7,6 +7,7 @@ import { SiGeeksforgeeks } from 'react-icons/si'
 import { SiCodeforces } from 'react-icons/si'
 import { toast } from 'react-toastify'
 import dateConfig from '../config/dateConfig'
+import { useGoogleLogin } from '@react-oauth/google'
 
 const ContestContext = createContext()
 
@@ -177,6 +178,34 @@ export const ContestProvider = ({ children }) => {
 		// setUser(jwtToken)
 	}
 
+	// Athorization Code
+	const login = useGoogleLogin({
+		onSuccess: async ({ code }) => {
+			await axios
+				.post(
+					`${proxy}/auth/google`,
+					{
+						code,
+					},
+					{ withCredentials: true },
+				)
+				.then((response) => {
+					console.log(response.data)
+					toast.success(response.data.message, toastSuccess)
+					loginHandler(response.data.uid, response.data.userPicture)
+				})
+				.catch((err) => {
+					console.log(err)
+					toast.warn(err.message, toastWarning)
+				})
+		},
+		flow: 'auth-code',
+		onError: (err) => {
+			console.log('error', err)
+		},
+		scope: 'https://www.googleapis.com/auth/calendar',
+	})
+
 	const logoutHandler = () => {
 		axios.get(`${proxy}/auth/logout`, { withCredentials: true })
 		localStorage.removeItem('uid')
@@ -225,6 +254,7 @@ export const ContestProvider = ({ children }) => {
 				toastWarning,
 				userPicture,
 				setUserPicture,
+				login,
 			}}
 		>
 			{!isLoading && children}

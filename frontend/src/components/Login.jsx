@@ -110,37 +110,8 @@ function ProfileMenu() {
 }
 
 export function ComplexNavbar() {
-	const { loginHandler, isLogged, toastSuccess, isPhoneDisplay, toastWarning } =
-		useContext(ContestContext)
+	const { isLogged, isPhoneDisplay, login } = useContext(ContestContext)
 	console.log(isLogged)
-
-	// Athorization Code
-	const login = useGoogleLogin({
-		onSuccess: async ({ code }) => {
-			const jwtToken = await axios
-				.post(
-					'http://localhost:5000/auth/google',
-					{
-						code,
-					},
-					{ withCredentials: true },
-				)
-				.then((response) => {
-					console.log(response.data)
-					toast.success(response.data.message, toastSuccess)
-					loginHandler(response.data.uid, response.data.userPicture)
-				})
-				.catch((err) => {
-					console.log(err)
-					toast.warn(err.message, toastWarning)
-				})
-		},
-		flow: 'auth-code',
-		onError: (err) => {
-			console.log('error', err)
-		},
-		scope: 'https://www.googleapis.com/auth/calendar',
-	})
 
 	return (
 		<div
