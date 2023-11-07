@@ -1,14 +1,12 @@
 import { useContext } from 'react'
 import ContestContext from '../context/ContestContext'
 import Dashboard from '../scenes/dashboard'
-import { ComplexNavbar } from './tempNav'
 
 function DisplayAllContests() {
 	const { contest, isPhoneDisplay } = useContext(ContestContext)
 	// console.log(contest)
 	return (
 		<div>
-			<ComplexNavbar />
 			<div style={{ width: '120%', margin: 'auto' }}>
 				<div className='ml-[15%] mt-10 mr-[10%] '>
 					<h1

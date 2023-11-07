@@ -2,18 +2,15 @@ import ContestContext from '../../context/ContestContext'
 import { useContext } from 'react'
 import Card from '../../components/Card'
 import { DateTime } from 'luxon'
-import { ComplexNavbar } from '../../components/tempNav'
 
 const Dashboard = ({ Contest }) => {
 	let { curContest, contestLogoMap, isPhoneDisplay } = useContext(ContestContext)
 	if (Contest != null) {
 		curContest = Contest
 	}
-	// console.log('inside ', curContest.contestName)
 
 	return (
 		<>
-			{/* <ComplexNavbar /> */}
 			<br />
 			<div style={{ width: '120%', margin: 'auto' }}>
 				<div className='ml-[15%] mt-10 mr-[10%] '>
