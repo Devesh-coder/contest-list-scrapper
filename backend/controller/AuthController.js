@@ -30,15 +30,15 @@ const callback = asyncHandler(async (req, res) => {
 		maxAge,
 		httpOnly: true,
 		path: '/',
-		// domain: frontend_url,
-		// secure: true,
-		// sameSite: 'None',
+		secure: true,
+		sameSite: 'None',
 	})
 
 	res.json({
 		message: 'Login Successful',
 		token: tokens.id_token,
 		uid: userCred._id,
+		userPicture: userCred.picture,
 	})
 })
 
@@ -60,8 +60,8 @@ const refreshToken = asyncHandler(async (req, res) => {
 		maxAge,
 		httpOnly: true,
 		path: '/',
-		// secure: true,
-		// sameSite: 'None',
+		secure: true,
+		sameSite: 'None',
 	})
 
 	res.json({ status: true, message: 'Session Extended' })

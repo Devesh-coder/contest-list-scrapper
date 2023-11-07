@@ -17,6 +17,7 @@ export const ContestProvider = ({ children }) => {
 	const [color, setColor] = useState('none')
 	const [showAllContests, setShowAllContests] = useState(true)
 	const [isLogged, setIsLogged] = useState(false)
+	const [userPicture, setUserPicture] = useState('')
 
 	const proxy = process.env.BACKEND_URL || 'http://localhost:5000'
 
@@ -169,9 +170,10 @@ export const ContestProvider = ({ children }) => {
 	// userLogging
 	// const [user, setUser] = useState(null)
 
-	const loginHandler = async (uid) => {
+	const loginHandler = async (uid, userPic) => {
 		localStorage.setItem('uid', uid)
 		setIsLogged(true)
+		setUserPicture(userPic)
 		// setUser(jwtToken)
 	}
 
@@ -221,6 +223,8 @@ export const ContestProvider = ({ children }) => {
 				isLogged,
 				toastSuccess,
 				toastWarning,
+				userPicture,
+				setUserPicture,
 			}}
 		>
 			{!isLoading && children}

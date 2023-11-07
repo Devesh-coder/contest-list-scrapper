@@ -54,7 +54,7 @@ function GoogleAuth() {
 
 	return (
 		<>
-			{!isLogged ? (
+			{/* {!isLogged ? (
 				// <GoogleLogin
 				// 	onSuccess={login}
 				// 	onError={() => {
@@ -72,7 +72,7 @@ function GoogleAuth() {
 					Logout
 				</button>
 			)}
-			<ToastContainer />
+			<ToastContainer /> */}
 		</>
 	)
 }

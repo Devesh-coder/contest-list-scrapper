@@ -2,9 +2,9 @@ var cron = require('node-cron')
 const data_fetch = require('./data-fetcher/data-fetch')
 const contestUpload = require('./routes/contestsDataDB')
 
-const redisClient = require('./config/redis')
+// const redisClient = require('./config/redis')
 
-cron.schedule('50 * * * *', async () => {
+cron.schedule('1 1 1 1 1', async () => {
 	try {
 		console.log('Running every week on wednesday at 00:00')
 

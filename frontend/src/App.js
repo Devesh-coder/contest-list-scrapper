@@ -12,6 +12,7 @@ import ContestContext from './context/ContestContext'
 import { useContext } from 'react'
 import DisplayAllContests from './components/DisplayAllContests'
 import GoogleAuth from './components/GoogleAuth'
+import { ComplexNavbar } from './components/tempNav'
 
 function App() {
 	const [theme, colorMode] = useMode()
@@ -20,6 +21,7 @@ function App() {
 
 	return (
 		<ColorModeContext.Provider value={colorMode}>
+			{/* <ComplexNavbar /> */}
 			<GoogleAuth />
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
