@@ -1,6 +1,5 @@
 const { parse, format } = require('date-fns')
 const { DateTime, Duration } = require('luxon')
-const moment = require('moment')
 
 const dateConfig = (contest) => {
 	contest.sort((a, b) => a.contestName.localeCompare(b.contestName))

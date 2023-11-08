@@ -4,6 +4,42 @@ const { findUser } = require('./userCredentials')
 const { luxon } = require('luxon')
 dotenv.config()
 
+// ------------------------Duration------------------------
+
+// const { parse, add, isMatch } = require('date-fns')
+// const chrono = require('chrono-node')
+const moment = require('moment')
+
+function parseDuration(durationString) {
+	const regex = /(\d+(\.\d+)?)\s*(hr|hour|hrs|hours|day|days)?/i
+	const timeRegex = /^(\d{1,2}):(\d{2})$/
+
+	const match = durationString.match(regex)
+	const timeMatch = durationString.match(timeRegex)
+
+	if (timeMatch) {
+		let hours = parseInt(timeMatch[1], 10)
+		let minutes = parseInt(timeMatch[2], 10)
+
+		return hours * 60 * 60 * 1000 + minutes * 60 * 1000 // Convert hours and minutes to milliseconds
+	}
+
+	if (match) {
+		let value = parseFloat(match[1])
+		let unit = match[3] ? match[3].toLowerCase() : 'hr' // Default to 'hr' if no unit provided
+
+		if (unit === 'hr' || unit === 'hour' || unit === 'hrs' || unit === 'hours') {
+			return value * 60 * 60 * 1000 // Convert hours to milliseconds
+		} else if (unit === 'day' || unit === 'days') {
+			return value * 24 * 60 * 60 * 1000 // Convert days to milliseconds
+		}
+	}
+
+	return null // Invalid input
+}
+
+// ------------------------Duration------------------------
+
 const oauth2Client = new google.auth.OAuth2(
 	process.env.CLIENT_ID,
 	process.env.CLIENT_SECRET,
@@ -15,7 +51,9 @@ const createEvent = async (req, res) => {
 	try {
 		const { name, link, startTime, duration } = req.body.contest
 		const token = req.cookies.jwtToken
-		// console.log(token, 'token')
+		console.log(req.body.contest, 'body')
+		let milis = parseDuration(duration)
+		console.log(milis, 'milis')
 
 		console.log(typeof startTime, startTime, 'start time')
 		token === undefined &&
@@ -38,9 +76,7 @@ const createEvent = async (req, res) => {
 					timeZone: 'Asia/Kolkata',
 				},
 				end: {
-					dateTime: new Date(
-						new Date(startTime).getTime() + 2 * 60 * 60 * 1000,
-					).toISOString(),
+					dateTime: new Date(new Date(startTime).getTime() + milis).toISOString(),
 					timeZone: 'Asia/Kolkata',
 				},
 				// start: {

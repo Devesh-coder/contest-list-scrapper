@@ -75,7 +75,14 @@ function ProfileMenu() {
 					return (
 						<MenuItem
 							key={label}
-							onClick={closeMenu}
+							onClick={() => {
+								if (isLastItem) {
+									console.log('logout')
+									logoutHandler()
+									googleLogout()
+								}
+								closeMenu()
+							}}
 							className={`flex items-center gap-2 rounded ${
 								isLastItem
 									? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'

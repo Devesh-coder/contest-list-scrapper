@@ -63,6 +63,10 @@ export const ContestProvider = ({ children }) => {
 		// })
 	}
 
+	function deleteCookie(cookieName) {
+		document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+	}
+
 	const handleCalendar = async (contest) => {
 		console.log('calendar', contest.contest)
 		await axios
@@ -107,6 +111,7 @@ export const ContestProvider = ({ children }) => {
 						sessionStatus,
 					)
 					if (localStorage.getItem('uid') == null) {
+						if (document.cookie.includes('jwtToken')) deleteCookie('jwtToken')
 						sessionStatus = false
 						toast.warn(`${err.response.data.message}`, toastWarning)
 						setIsLogged(false)
@@ -210,6 +215,7 @@ export const ContestProvider = ({ children }) => {
 	const logoutHandler = () => {
 		axios.get(`${proxy}/auth/logout`, { withCredentials: true })
 		localStorage.removeItem('uid')
+		localStorage.removeItem('uPic')
 		setIsLogged(false)
 		toast.success('Logout Successful', toastSuccess)
 		// setUser(null)
