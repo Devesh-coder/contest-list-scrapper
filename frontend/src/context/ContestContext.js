@@ -6,7 +6,6 @@ import { SiCodingninjas } from 'react-icons/si'
 import { SiGeeksforgeeks } from 'react-icons/si'
 import { SiCodeforces } from 'react-icons/si'
 import { toast } from 'react-toastify'
-import dateConfig from '../config/dateConfig'
 import { useGoogleLogin } from '@react-oauth/google'
 
 const ContestContext = createContext()
@@ -85,7 +84,6 @@ export const ContestProvider = ({ children }) => {
 			const data = await axios.get(`${proxy}/contests`)
 
 			setContest(data.data)
-			// dateConfig(data.data)
 			console.log(data.data)
 		}
 		fetchData()
@@ -100,6 +98,7 @@ export const ContestProvider = ({ children }) => {
 				.then((response) => {
 					console.log(response.data)
 					toast.success('User Signed In', toastSuccess)
+					setUserPicture(localStorage.getItem('uPic'))
 				})
 				.catch(async (err) => {
 					console.log(
@@ -126,6 +125,7 @@ export const ContestProvider = ({ children }) => {
 							)
 							console.log(credentials.data, credentials.data.message)
 							toast.success(credentials.data.message, toastSuccess)
+							setUserPicture(localStorage.getItem('uPic'))
 						} catch (err) {
 							sessionStatus = false
 							console.log(err)
@@ -173,6 +173,7 @@ export const ContestProvider = ({ children }) => {
 
 	const loginHandler = async (uid, userPic) => {
 		localStorage.setItem('uid', uid)
+		localStorage.setItem('uPic', userPic)
 		setIsLogged(true)
 		setUserPicture(userPic)
 		// setUser(jwtToken)
