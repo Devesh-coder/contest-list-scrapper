@@ -82,10 +82,11 @@ def codingNinja():
         print(len(upcoming_contests))
         for contest in upcoming_contests:
             contest_name = contest.find_element(By.CLASS_NAME, "heading").text
+            contest_link = "https://www.codingninjas.com/studio/contests"
             contest_start_time = contest.find_element(
                 By.CLASS_NAME, "notify").text
             ninja_data.append(contest_schema(
-                contest_name, "", contest_start_time, "2hr"))
+                contest_name, contest_link, contest_start_time, "2hr"))
             print(contest_name, contest_start_time)
 
         return ninja_data

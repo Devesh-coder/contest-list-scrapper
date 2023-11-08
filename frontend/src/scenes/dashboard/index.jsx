@@ -8,6 +8,8 @@ const Dashboard = ({ Contest }) => {
 		curContest = Contest
 	}
 
+	const durationIfCodingNinja = 'Click card'
+
 	return (
 		<>
 			<br />
@@ -34,7 +36,11 @@ const Dashboard = ({ Contest }) => {
 										link={contest.link}
 										title={contest.name}
 										start={new Date(contest.startTime).toDateString()}
-										duration={contest.duration}
+										duration={
+											curContest.contestName != 'CodingNinja'
+												? contest.duration
+												: durationIfCodingNinja
+										}
 										contest={contest}
 									/>
 									<br />
