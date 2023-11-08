@@ -1,6 +1,5 @@
 const fs = require('fs')
 const Contest = require('../models/contest')
-const Redis = require('redis')
 const dateConfig = require('../config/dateConfig')
 
 const contestUpload = async () => {

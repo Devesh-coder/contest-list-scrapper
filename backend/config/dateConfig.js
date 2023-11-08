@@ -2,8 +2,8 @@ const { parse, format } = require('date-fns')
 const { DateTime, Duration } = require('luxon')
 
 const dateConfig = (contest) => {
-	contest.sort((a, b) => a.contestName.localeCompare(b.contestName))
-	console.log('dateConfig ', contest)
+	// contest.sort((a, b) => a.contestName.localeCompare(b.contestName))
+	// console.log('dateConfig ', json.stringify(contest))
 
 	for (let i = 0; i < contest.length; i++) {
 		if (contest[i].contestName == 'Codechef') {

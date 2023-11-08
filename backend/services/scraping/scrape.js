@@ -2,9 +2,10 @@ var cron = require('node-cron')
 const data_fetch = require('../data-fetcher/data-fetch')
 const contestUpload = require('../../routes/contestsDataDB')
 
-// const redisClient = require('./config/redis')
+const redisClient = require('../../config/redis')
 
-cron.schedule('30 1 * * *', async () => {
+cron.schedule('0 3 * * 3', async () => {
+	// 0 3 * * 3 to scrape every wednesday at 3:00 am
 	try {
 		console.log('Running every week on wednesday at 00:00')
 
@@ -14,9 +15,9 @@ cron.schedule('30 1 * * *', async () => {
 		console.log('data scraped and fetched')
 
 		await contestUpload()
-		// await redisClient.flushAll(function (err, succeeded) {
-		// 	console.log(succeeded) // will be true if successfull
-		// })
+		await redisClient.flushAll(function (err, succeeded) {
+			console.log(succeeded, 'cache cleared') // will be true if successfull
+		})
 	} catch (error) {
 		console.error(error)
 	}
