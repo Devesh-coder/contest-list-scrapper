@@ -5,14 +5,14 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const dotenv = require('dotenv')
 dotenv.config()
-const frontend_url = process.env.FRONTEND_URL
+const FRONTEND_URL = process.env.FRONTEND_URL
 
-console.log(frontend_url)
+console.log(FRONTEND_URL)
 app.use(
 	cors({
 		origin: {
 			'http://localhost:3000': true,
-			frontend_url: true,
+			FRONTEND_URL: true,
 		},
 		// origin: '*', // Allow from anywhere
 		credentials: true,
@@ -24,7 +24,7 @@ app.use(cookieParser())
 const port = 5000 || process.env.PORT
 
 require('./config/database')
-require('./scrape')
+require('./services/scraping/scrape')
 
 const contestsRoute = require('./routes/contestData')
 const calendarRoute = require('./routes/calendarRoute')

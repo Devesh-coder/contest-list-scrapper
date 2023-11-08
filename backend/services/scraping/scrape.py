@@ -256,8 +256,10 @@ def scrape_data():
 
     try:
 
+        sorted_contest_list = sorted(contest_data, key=lambda x: x['contestName'])
+
         f = open("data.json", "w")
-        f.write(json.dumps(contest_data))
+        f.write(json.dumps(sorted_contest_list))
         f.close()
     except:
         print("Error in writing to file")

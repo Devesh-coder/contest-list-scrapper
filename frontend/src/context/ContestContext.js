@@ -85,7 +85,7 @@ export const ContestProvider = ({ children }) => {
 			const data = await axios.get(`${proxy}/contests`)
 
 			setContest(data.data)
-			dateConfig(data.data)
+			// dateConfig(data.data)
 			console.log(data.data)
 		}
 		fetchData()

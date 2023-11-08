@@ -5,7 +5,7 @@ const data_fetch = async () => {
 	try {
 		const callingPythonScript = async () => {
 			// Set the path to the Python script
-			const pythonScriptPath = './scrape.py'
+			const pythonScriptPath = './services/scraping/scrape.py'
 
 			// Create a new child process using spawn()
 			const pythonProcess = spawn('python', [pythonScriptPath])

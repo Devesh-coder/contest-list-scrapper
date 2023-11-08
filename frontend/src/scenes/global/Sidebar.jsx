@@ -95,8 +95,8 @@ const Sidebar = () => {
 						icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
 						style={{
 							paddingTop: isCollapsed ? '20px' : undefined,
-							marginBottom: isCollapsed ? '100px' : undefined,
-							margin: '20px 0 20px 0',
+							marginBottom: isCollapsed ? '120px' : '20px',
+							marginTop: '20px',
 							color: colors.grey[100],
 						}}
 					>
