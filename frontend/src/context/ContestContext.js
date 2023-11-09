@@ -20,7 +20,8 @@ export const ContestProvider = ({ children }) => {
 	const [userPicture, setUserPicture] = useState('')
 
 	const proxy =
-		process.env.BACKEND_URL || 'https://contests-arena.netlify.app/api'
+		process.env.BACKEND_URL ||
+		'http://contestarena-env.eba-akwwqap2.ap-south-1.elasticbeanstalk.com'
 	console.log(proxy)
 
 	const background = [
