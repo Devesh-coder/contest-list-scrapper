@@ -21,7 +21,7 @@ app.use(
 app.use(express.json())
 app.use(cookieParser())
 
-const port = 5000 || process.env.PORT
+const port = process.env.PORT || 5000
 
 require('./config/database')
 require('./services/scraping/scrape')
