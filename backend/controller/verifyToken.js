@@ -25,7 +25,7 @@ async function verify(token) {
 
 const verifyToken = async (req, res, next) => {
 	const jwtToken = req.cookies.jwtToken
-	console.log(jwt.decode(jwtToken), '\n	', 'verify token middleware')
+	console.log('inside verifyToken')
 
 	if (!jwtToken) {
 		console.log('Unauthorized')

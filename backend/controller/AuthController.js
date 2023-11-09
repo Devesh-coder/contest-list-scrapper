@@ -47,14 +47,14 @@ const refreshToken = asyncHandler(async (req, res) => {
 	console.log(uid, 'uid')
 
 	const { refreshToken } = await findUserById(uid)
-	console.log(refreshToken, 'refreshToken')
+	console.log('refreshToken generated')
 	const user = new UserRefreshClient(
 		process.env.CLIENT_ID,
 		process.env.CLIENT_SECRET,
 		refreshToken,
 	)
 	const { credentials } = await user.refreshAccessToken() // optain new tokens
-	console.log(credentials, 'credentials')
+	console.log('user credentials generated')
 	const maxAge = 60 * 60 * 1000 // 1 hour
 	res.cookie('jwtToken', credentials.id_token, {
 		maxAge,
@@ -63,6 +63,8 @@ const refreshToken = asyncHandler(async (req, res) => {
 		secure: true,
 		sameSite: 'None',
 	})
+
+	console.log('cookie set')
 
 	res.json({ status: true, message: 'Session Extended' })
 })

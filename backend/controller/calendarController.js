@@ -6,8 +6,6 @@ dotenv.config()
 
 // ------------------------Duration------------------------
 
-// const { parse, add, isMatch } = require('date-fns')
-// const chrono = require('chrono-node')
 const moment = require('moment')
 
 function parseDuration(durationString) {
@@ -47,7 +45,7 @@ const oauth2Client = new google.auth.OAuth2(
 )
 
 const createEvent = async (req, res) => {
-	console.log(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
+	// console.log(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
 	try {
 		const { name, link, startTime, duration } = req.body.contest
 		const token = req.cookies.jwtToken
@@ -59,9 +57,9 @@ const createEvent = async (req, res) => {
 		token === undefined &&
 			res.status(401).send({ status: 'error', message: 'Please login first' })
 		const date = new Date(startTime)
-		console.log(date, 'date')
+		// console.log(date, 'date')
 		const { refreshToken } = await findUser(token)
-		console.log(refreshToken, 'refresh tokens')
+		// console.log(refreshToken, 'refresh tokens')
 
 		oauth2Client.setCredentials({ refresh_token: refreshToken })
 		const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
@@ -79,14 +77,6 @@ const createEvent = async (req, res) => {
 					dateTime: new Date(new Date(startTime).getTime() + milis).toISOString(),
 					timeZone: 'Asia/Kolkata',
 				},
-				// start: {
-				// 	dateTime: new Date(new Date().getTime() + 12 * 60 * 1000).toISOString(),
-				// 	timeZone: 'Asia/Kolkata',
-				// },
-				// end: {
-				// 	dateTime: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
-				// 	timeZone: 'Asia/Kolkata',
-				// },
 				summary: name,
 			},
 		})
