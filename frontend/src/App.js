@@ -13,6 +13,7 @@ import { useContext } from 'react'
 import DisplayAllContests from './components/DisplayAllContests'
 import GoogleAuth from './components/GoogleAuth'
 import { ComplexNavbar } from './components/Login'
+import SimpleFooter from './components/Footer'
 
 function App() {
 	const [theme, colorMode] = useMode()
@@ -26,7 +27,7 @@ function App() {
 				<div className='app' style={{ overflow: 'hidden' }}>
 					<Sidebar isSidebar={isSidebar} />
 					<main className='content'>
-						<ComplexNavbar />
+						{/* <ComplexNavbar />   Google Login */}
 						{showAllContests ? <DisplayAllContests /> : <Dashboard />}
 
 						{/* <Routes>
@@ -34,6 +35,7 @@ function App() {
 							</Routes> */}
 					</main>
 				</div>
+				<SimpleFooter />
 			</ThemeProvider>
 		</ColorModeContext.Provider>
 	)

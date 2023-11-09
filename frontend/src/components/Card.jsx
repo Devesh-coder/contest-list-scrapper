@@ -17,15 +17,16 @@ function Card({ link, title, start, duration, contest }) {
 			}}
 			className='hover:drop-shadow-2xl min-h-full max-h-100 bg-base-100 border-solid border-2 p-4 rounded-md '
 		>
+			{/* For saving events in google calendar */}
 			<span
 				style={{
 					marginLeft: '11rem',
 					fontSize: '1.25rem',
 					cursor: 'pointer',
 				}}
-				onClick={() => handleCalendar({ contest })}
+				// onClick={() => handleCalendar({ contest })}
 			>
-				<FontAwesomeIcon icon={faCalendar} />
+				{/* <FontAwesomeIcon icon={faCalendar} /> */}
 			</span>
 			<a href={link} target='_blank'>
 				<div className='my-[-10%]'>
