@@ -1,0 +1,1 @@
+/api/* http://contestarena-env.eba-akwwqap2.ap-south-1.elasticbeanstalk.com/:splat 200!
