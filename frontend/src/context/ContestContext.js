@@ -19,7 +19,10 @@ export const ContestProvider = ({ children }) => {
 	const [isLogged, setIsLogged] = useState(false)
 	const [userPicture, setUserPicture] = useState('')
 
-	const proxy = process.env.BACKEND_URL || 'http://localhost:5000'
+	const proxy =
+		process.env.BACKEND_URL ||
+		'http://contestarena-env.eba-akwwqap2.ap-south-1.elasticbeanstalk.com'
+	console.log(proxy)
 
 	const background = [
 		{
