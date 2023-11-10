@@ -98,13 +98,6 @@ function ProfileMenu() {
 								variant='small'
 								className='font-normal'
 								color={isLastItem ? 'red' : 'inherit'}
-								onClick={() => {
-									if (isLastItem) {
-										console.log('logout')
-										logoutHandler()
-										googleLogout()
-									}
-								}}
 							>
 								{label}
 							</Typography>

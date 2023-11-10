@@ -24,9 +24,9 @@ function Card({ link, title, start, duration, contest }) {
 					fontSize: '1.25rem',
 					cursor: 'pointer',
 				}}
-				// onClick={() => handleCalendar({ contest })}
+				onClick={() => handleCalendar({ contest })}
 			>
-				{/* <FontAwesomeIcon icon={faCalendar} /> */}
+				<FontAwesomeIcon icon={faCalendar} />
 			</span>
 			<a href={link} target='_blank'>
 				<div className='my-[-10%]'>

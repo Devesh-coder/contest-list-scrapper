@@ -22,7 +22,7 @@ function SimpleFooter() {
 					>
 						Home
 					</Typography>
-				</li>
+				</li>  */}
 				<li>
 					<Typography
 						as='a'
@@ -32,7 +32,7 @@ function SimpleFooter() {
 					>
 						Privacy Policies
 					</Typography>
-				</li> */}
+				</li>
 				<li>
 					<Typography
 						onClick={handleClick}

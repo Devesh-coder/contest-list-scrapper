@@ -27,9 +27,8 @@ function App() {
 				<div className='app' style={{ overflow: 'hidden' }}>
 					<Sidebar isSidebar={isSidebar} />
 					<main className='content'>
-						{/* <ComplexNavbar />   Google Login */}
+						<ComplexNavbar /> {/* Google Login */}
 						{showAllContests ? <DisplayAllContests /> : <Dashboard />}
-
 						{/* <Routes>
 								<Route path='/' element={<Dashboard />} />
 							</Routes> */}
