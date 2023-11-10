@@ -1,4 +1,5 @@
 import { Typography } from '@material-tailwind/react'
+import { NavLink, Link } from 'react-router-dom'
 
 function SimpleFooter() {
 	const email = process.env.EMAIL || 'cuppcake326@gmail.com'
@@ -13,24 +14,20 @@ function SimpleFooter() {
 				&copy; 2023 Contest Arena
 			</Typography>
 			<ul className='flex flex-wrap items-center gap-y-2 gap-x-8'>
-				{/* <li>
-					<Typography
-						as='a'
-						href='#'
-						color='blue-gray'
-						className='font-normal transition-colors hover:text-blue-500 focus:text-blue-500'
-					>
-						Home
-					</Typography>
-				</li>  */}
 				<li>
 					<Typography
-						as='a'
-						href='#'
 						color='blue-gray'
 						className='font-normal transition-colors hover:text-blue-500 focus:text-blue-500'
 					>
-						Privacy Policies
+						<NavLink to={'/'}>Home</NavLink>
+					</Typography>
+				</li>
+				<li>
+					<Typography
+						color='blue-gray'
+						className='font-normal transition-colors hover:text-blue-500 focus:text-blue-500'
+					>
+						<NavLink to={'/privacy-policy'}>Privacy Policies</NavLink>
 					</Typography>
 				</li>
 				<li>

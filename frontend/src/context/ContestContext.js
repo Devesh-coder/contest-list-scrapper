@@ -220,6 +220,7 @@ export const ContestProvider = ({ children }) => {
 		axios.get(`${proxy}/auth/logout`, { withCredentials: true })
 		localStorage.removeItem('uid')
 		localStorage.removeItem('uPic')
+		deleteCookie('jwtToken')
 		setIsLogged(false)
 		toast.success('Logout Successful', toastSuccess)
 		// setUser(null)

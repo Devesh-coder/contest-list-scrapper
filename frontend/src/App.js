@@ -14,6 +14,7 @@ import DisplayAllContests from './components/DisplayAllContests'
 import GoogleAuth from './components/GoogleAuth'
 import { ComplexNavbar } from './components/Login'
 import SimpleFooter from './components/Footer'
+import PrivacyPolicy from './components/PrivacyPolicy'
 
 function App() {
 	const [theme, colorMode] = useMode()
@@ -22,20 +23,11 @@ function App() {
 
 	return (
 		<ColorModeContext.Provider value={colorMode}>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<div className='app' style={{ overflow: 'hidden' }}>
-					<Sidebar isSidebar={isSidebar} />
-					<main className='content'>
-						<ComplexNavbar /> {/* Google Login */}
-						{showAllContests ? <DisplayAllContests /> : <Dashboard />}
-						{/* <Routes>
-								<Route path='/' element={<Dashboard />} />
-							</Routes> */}
-					</main>
-				</div>
-				<SimpleFooter />
-			</ThemeProvider>
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/privacy-policy' element={<PrivacyPolicy />} />
+			</Routes>
+			<SimpleFooter />
 		</ColorModeContext.Provider>
 	)
 }
