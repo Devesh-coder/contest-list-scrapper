@@ -58,8 +58,9 @@ const createEvent = async (req, res) => {
 		new Date(new Date(startTime).getTime() + milis).toISOString(),
 		'start time',
 	)
-	if (token === undefined)
+	if (token === undefined) {
 		res.status(401).send({ status: 'error', message: 'Please login first' })
+	}
 	const date = new Date(startTime)
 	// console.log(date, 'date')
 	const { refreshToken } = await findUser(token)

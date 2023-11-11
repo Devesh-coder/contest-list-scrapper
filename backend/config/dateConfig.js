@@ -61,8 +61,6 @@ const dateConfig = (contest) => {
 				if (contest.startTime.startsWith('Starts in')) {
 					const daysToAdd = parseInt(contest.startTime.split(' ')[2])
 					startTime = DateTime.now().plus({ days: daysToAdd })
-				} else {
-					startTime = DateTime.now()
 				}
 
 				// const durationString = contest.duration.replace('hr', 'hours')
