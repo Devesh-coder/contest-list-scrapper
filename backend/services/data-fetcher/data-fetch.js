@@ -18,7 +18,6 @@ const data_fetch = async () => {
 			// Handle errors from the script
 			pythonProcess.stderr.on('data', (data) => {
 				console.error(`stderr: ${data}`)
-				reject(new Error(`Error in Python script: ${data}`))
 			})
 
 			// Handle the process exit event
