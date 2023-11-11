@@ -4,7 +4,7 @@ const User = require('../models/userMode')
 
 const updateUser = async (refreshToken, jwtToken) => {
 	const { email, name, picture } = jwt.decode(jwtToken)
-	console.log(jwtToken)
+	// console.log(jwtToken)
 
 	return await User.findOneAndUpdate(
 		{ email },
