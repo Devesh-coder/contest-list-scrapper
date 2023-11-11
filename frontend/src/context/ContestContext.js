@@ -19,8 +19,7 @@ export const ContestProvider = ({ children }) => {
 	const [isLogged, setIsLogged] = useState(false)
 	const [userPicture, setUserPicture] = useState('')
 
-	// const proxy =
-	// 	process.env.BACKEND_URL ||
+	// const proxy = process.env.BACKEND_URL || 'http://localhost:5000'
 	// 	'http://contestarena-env.eba-akwwqap2.ap-south-1.elasticbeanstalk.com'
 	const proxy = '/api'
 	console.log(proxy)
@@ -67,10 +66,6 @@ export const ContestProvider = ({ children }) => {
 		// })
 	}
 
-	function deleteCookie(cookieName) {
-		document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
-	}
-
 	const handleCalendar = async (contest) => {
 		console.log('calendar', contest.contest)
 		await axios
@@ -115,7 +110,6 @@ export const ContestProvider = ({ children }) => {
 						sessionStatus,
 					)
 					if (localStorage.getItem('uid') == null) {
-						if (document.cookie.includes('jwtToken')) deleteCookie('jwtToken')
 						sessionStatus = false
 						toast.warn(`${err.response.data.message}`, toastWarning)
 						setIsLogged(false)
@@ -216,11 +210,14 @@ export const ContestProvider = ({ children }) => {
 		scope: 'https://www.googleapis.com/auth/calendar',
 	})
 
-	const logoutHandler = () => {
-		axios.get(`${proxy}/auth/logout`, { withCredentials: true })
+	const logoutHandler = async () => {
+		await axios.get(`${proxy}/auth/logout`, {
+			withCredentials: true,
+			referrerPolicy: 'no-referrer',
+		})
+
 		localStorage.removeItem('uid')
 		localStorage.removeItem('uPic')
-		deleteCookie('jwtToken')
 		setIsLogged(false)
 		toast.success('Logout Successful', toastSuccess)
 		// setUser(null)

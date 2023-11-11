@@ -46,21 +46,26 @@ const oauth2Client = new google.auth.OAuth2(
 
 const createEvent = async (req, res) => {
 	// console.log(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
+	const { name, link, startTime, duration } = req.body.contest
+	const token = req.cookies.jwtToken
+	console.log(req.body.contest, 'body')
+	let milis = parseDuration(duration)
+	console.log(milis, 'milis')
+
+	console.log(
+		typeof startTime,
+		new Date(startTime).toISOString(),
+		new Date(new Date(startTime).getTime() + milis).toISOString(),
+		'start time',
+	)
+	if (token === undefined)
+		res.status(401).send({ status: 'error', message: 'Please login first' })
+	const date = new Date(startTime)
+	// console.log(date, 'date')
+	const { refreshToken } = await findUser(token)
+	// console.log(refreshToken, 'refresh tokens')
+
 	try {
-		const { name, link, startTime, duration } = req.body.contest
-		const token = req.cookies.jwtToken
-		console.log(req.body.contest, 'body')
-		let milis = parseDuration(duration)
-		console.log(milis, 'milis')
-
-		console.log(typeof startTime, startTime, 'start time')
-		token === undefined &&
-			res.status(401).send({ status: 'error', message: 'Please login first' })
-		const date = new Date(startTime)
-		// console.log(date, 'date')
-		const { refreshToken } = await findUser(token)
-		// console.log(refreshToken, 'refresh tokens')
-
 		oauth2Client.setCredentials({ refresh_token: refreshToken })
 		const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
 		const response = await calendar.events.insert({
@@ -80,9 +85,14 @@ const createEvent = async (req, res) => {
 				summary: name,
 			},
 		})
-		res.send(response)
-	} catch (error) {
-		res.json({ error: error.message })
+		res.json({
+			status: 'success',
+			message: 'Event created successfully',
+			response,
+		})
+	} catch (err) {
+		console.log(err)
+		res.status(400).json({ status: 'error', message: 'Error creating event' })
 	}
 }
 

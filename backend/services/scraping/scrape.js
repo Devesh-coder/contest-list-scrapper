@@ -4,7 +4,7 @@ const contestUpload = require('../../routes/contestsDataDB')
 
 // const redisClient = require('../../config/redis')
 
-cron.schedule('0 3 * * 3', async () => {
+cron.schedule('50 * * * *', async () => {
 	// 0 3 * * 3 to scrape every wednesday at 3:00 am
 	try {
 		console.log('Running every week on wednesday at 00:00')
