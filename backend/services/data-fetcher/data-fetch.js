@@ -7,7 +7,7 @@ const data_fetch = async () => {
 		const pythonScriptPath = './services/scraping/scrape.py'
 
 		// Create a new child process using spawn()
-		const pythonProcess = spawn('python3', [pythonScriptPath])
+		const pythonProcess = spawn('/usr/bin/python3', [pythonScriptPath])
 
 		return new Promise((resolve, reject) => {
 			// Handle standard output from the script
