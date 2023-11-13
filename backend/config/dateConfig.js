@@ -67,15 +67,15 @@ const dateConfig = (contest) => {
 				// const durationVal = DateTime.fromFormat(durationString, "H'hours'").toFormat(
 				// 	"H'h' mm'm'",
 				// )
-				const durationVal = 'Click to know more'
+				// const durationVal = 'Click to know more'
 				contest.startTime = startTime
 
-				console.log(
-					'Coding Ninja\n',
-					durationVal,
-					startTime.toISO(),
-					startTime.toLocaleString(DateTime.DATETIME_FULL),
-				)
+				// console.log(
+				// 	'Coding Ninja\n',
+				// 	durationVal,
+				// 	startTime.toISO(),
+				// 	startTime.toLocaleString(DateTime.DATETIME_FULL),
+				// )
 			})
 		} else if (contest[i].contestName == 'GeeksForGeeks') {
 			contest[3].contests.map((item) => {

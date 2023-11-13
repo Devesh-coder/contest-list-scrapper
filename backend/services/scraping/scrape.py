@@ -1,19 +1,24 @@
+import json
+from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from webdriver_manager.chrome import ChromeDriverManager
-import json
-import threading
 import sys
 import ast  # for converting string to dict
+import threading
 
-op = webdriver.ChromeOptions()
-op.add_argument('--ignore-certificate-errors')
-op.add_argument('headless')
-op.add_argument('window-size=1200x600')  # setting window size is optional
+options = Options()
+options.add_argument("--headless")
+options.add_argument("window-size=1400,1500")
+options.add_argument("--disable-gpu")
+options.add_argument("--no-sandbox")
+options.add_argument("start-maximized")
+options.add_argument("enable-automation")
+options.add_argument("--disable-infobars")
+options.add_argument("--disable-dev-shm-usage")
 
 
 # PATH = "C:\Program Files (x86)\chromedriver.exe"
@@ -29,9 +34,7 @@ def contest_schema(contest_name, contest_link, contest_start_time, contest_durat
 
 def gfg():
 
-    driver = webdriver.Chrome(options=op)
-
-    # driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver = webdriver.Chrome(options=options)
 
     geek = 'https://practice.geeksforgeeks.org/events'
     driver.get(geek)
@@ -65,11 +68,10 @@ def gfg():
         print("Element not found or not visible")
         print('Inside GFG \n')
 
-
 def codingNinja():
     ninja = 'https://www.codingninjas.com/codestudio/contests'
 
-    driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome(options=options)
 
     driver.get(ninja)
     print(driver.title)
@@ -101,7 +103,7 @@ def codechef():
 
     codechef = 'https://www.codechef.com/contests'
 
-    driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome(options=options)
 
     driver.get(codechef)
     print(driver.title)
@@ -138,7 +140,7 @@ def codechef():
 def leetcode():
     leetcode = 'https://leetcode.com/contest/'
 
-    driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome(options=options)
 
     driver.get(leetcode)
     print(driver.title)
@@ -180,7 +182,7 @@ def codeforces():
 
     codeforces = 'https://codeforces.com/contests'
 
-    driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome(options=options)
 
     driver.get(codeforces)
     print(driver.title)
@@ -224,40 +226,23 @@ def codeforces():
 
 
 def scrape_data():
+    
+    all_contests = []
 
-    threads = []
-    contest_data = []
+    gfg_array = gfg()
+    leetcode_array = leetcode()
+    codingNinja_array = codingNinja()
+    codechef_array = codechef()
+    codeforces_array = codeforces()
 
-    # creating schema for each site
-    def scrape_site(site_name, scrape_function):
-        contest_data.append(
-            {"contestName": site_name, "contests": scrape_function()})
-
-    # Start a new thread for each site you want to scrape
-    threads.append(threading.Thread(
-        target=scrape_site, args=("GeeksForGeeks", gfg)))
-    threads.append(threading.Thread(target=scrape_site,
-                   args=("CodingNinja", codingNinja)))
-    threads.append(threading.Thread(
-        target=scrape_site, args=("Codechef", codechef)))
-    threads.append(threading.Thread(
-        target=scrape_site, args=("Leetcode", leetcode)))
-    threads.append(threading.Thread(
-        target=scrape_site, args=("Codeforces", codeforces)))
-
-    # Start all of the threads
-    for thread in threads:
-        # print("Starting thread for {thread.name}")
-        thread.start()
-
-    # Wait for all of the threads to complete
-    for thread in threads:
-        # print("Waiting for {thread} to complete...")
-        thread.join()
+    all_contests.extend(gfg_array)
+    all_contests.extend(codechef_array)
+    all_contests.extend(codingNinja_array)
+    all_contests.extend(leetcode_array)
+    all_contests.extend(codeforces_array)
 
     try:
-
-        sorted_contest_list = sorted(contest_data, key=lambda x: x['contestName'])
+        sorted_contest_list = sorted(all_contests, key=lambda x: x['contestName'])
 
         f = open("data.json", "w")
         f.write(json.dumps(sorted_contest_list))
@@ -265,7 +250,8 @@ def scrape_data():
     except:
         print("Error in writing to file")
 
-    return contest_data
+    return all_contests
 
 
 scrape_data()
+
