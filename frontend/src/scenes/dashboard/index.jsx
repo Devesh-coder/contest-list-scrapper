@@ -1,6 +1,7 @@
 import ContestContext from '../../context/ContestContext'
 import { useContext } from 'react'
 import Card from '../../components/Card'
+import { DateTime } from 'luxon'
 
 const Dashboard = ({ Contest }) => {
 	let { curContest, contestLogoMap, isPhoneDisplay } = useContext(ContestContext)
@@ -35,13 +36,16 @@ const Dashboard = ({ Contest }) => {
 									<Card
 										link={contest.link}
 										title={contest.name}
-										start={new Date(contest.startTime).toDateString()}
+										start={new Date(contest.startTime).toLocaleString(
+											DateTime.DATETIME_FULL,
+										)}
 										duration={
 											curContest.contestName != 'CodingNinja'
 												? contest.duration
 												: durationIfCodingNinja
 										}
 										contest={contest}
+										contestName={curContest.contestName}
 									/>
 									<br />
 								</div>

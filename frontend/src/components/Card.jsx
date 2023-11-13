@@ -3,9 +3,12 @@ import ContestContext from '../context/ContestContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faCalendarPlus } from '@fortawesome/free-solid-svg-icons'
 
-function Card({ link, title, start, duration, contest }) {
+function Card({ link, title, start, duration, contest, contestName }) {
 	const { color, handleCalendar, isPhoneDisplay } = useContext(ContestContext)
 	// console.log(color)
+	if (contestName === 'CodingNinja' && start === 'Invalid Date') {
+		start = 'Live Now'
+	}
 
 	return (
 		<div
@@ -31,7 +34,10 @@ function Card({ link, title, start, duration, contest }) {
 			<a href={link} target='_blank'>
 				<div className='my-[-10%]'>
 					<h4 className='font-bold text-xl mb-11 mt-6 min-h-20 h-20'> {title} </h4>
-					<p className='text-base mt-16 mb-5'>Duration: {duration} </p>
+					<p className='text-base mt-16 mb-5'>
+						Duration:
+						{` ${duration}`}
+					</p>
 					<p className='text-base mt-5'> {start} </p>
 				</div>
 			</a>
