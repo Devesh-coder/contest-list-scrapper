@@ -52,7 +52,7 @@ const data_fetch = async () => {
 
 		console.log(response.data)
 
-		fs.writeFileSync('../data.json', JSON.stringify(response.data))
+		fs.writeFileSync('./data.json', JSON.stringify(response.data))
 		console.log(
 			'new data added to the data.json file, and have successfully scrapped data',
 		)
