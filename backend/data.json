@@ -1,111 +1,156 @@
-[
-	{
-		"contestName": "Codechef",
-		"contests": [
-			{
-				"name": "Starters 108",
-				"link": "https://www.codechef.com/START108",
-				"startTime": "15 Nov 2023\nWed 20:00",
-				"duration": "2 Hrs"
-			},
-			{
-				"name": "Starters 109",
-				"link": "https://www.codechef.com/START109",
-				"startTime": "22 Nov 2023\nWed 20:00",
-				"duration": "2 Hrs"
-			},
-			{
-				"name": "Starters 110",
-				"link": "https://www.codechef.com/START110",
-				"startTime": "29 Nov 2023\nWed 20:00",
-				"duration": "2 Hrs"
-			}
-		]
-	},
-	{
-		"contestName": "Codeforces",
-		"contests": [
-			{
-				"name": "ICPC 2023 Online Challenge powered by Huawei",
-				"link": "https://codeforces.com/contestRegistration/1885",
-				"startTime": "Nov/20/2023 12:30UTC+5.5",
-				"duration": "14:00:00"
-			},
-			{
-				"name": "CodeTON Round 7 (Div. 1 + Div. 2, Rated, Prizes!)",
-				"link": "Before registration 7 days",
-				"startTime": "Nov/25/2023 20:05UTC+5.5",
-				"duration": "02:30"
-			}
-		]
-	},
-	{
-		"contestName": "CodingNinja",
-		"contests": [
-			{
-				"name": "Scholarship Test 11th to 20th Nov'23\nNew",
-				"link": "https://www.codingninjas.com/studio/contests",
-				"startTime": "Live Now",
-				"duration": "2hr"
-			},
-			{
-				"name": "Beginner Contest 47",
-				"link": "https://www.codingninjas.com/studio/contests",
-				"startTime": "Starts in 2 days",
-				"duration": "2hr"
-			},
-			{
-				"name": "Monthly Contest 20",
-				"link": "https://www.codingninjas.com/studio/contests",
-				"startTime": "Starts in 13 days",
-				"duration": "2hr"
-			},
-			{
-				"name": "Striver Binary Search Contest",
-				"link": "https://www.codingninjas.com/studio/contests",
-				"startTime": "Live Now",
-				"duration": "2hr"
-			},
-			{
-				"name": "Striver Array Contest",
-				"link": "https://www.codingninjas.com/studio/contests",
-				"startTime": "Live Now",
-				"duration": "2hr"
-			},
-			{
-				"name": "Striver DP Contest",
-				"link": "https://www.codingninjas.com/studio/contests",
-				"startTime": "Live Now",
-				"duration": "2hr"
-			}
-		]
-	},
-	{
-		"contestName": "GeeksForGeeks",
-		"contests": [
-			{
-				"name": "Bi-Wizard School Coding Tournament 21.0",
-				"link": "https://practice.geeksforgeeks.org/contest/bi-wizard-school-coding-tournament-210",
-				"startTime": "November 26, 2023 06:00 PM IST",
-				"duration": "1.5hr"
-			}
-		]
-	},
-	{
-		"contestName": "Leetcode",
-		"contests": [
-			{
-				"name": "Weekly Contest 372",
-				"link": "https://leetcode.com/contest/weekly-contest-372",
-				"startTime": "Sunday 8:00 AM GMT+5:30",
-				"duration": "2hr"
-			},
-			{
-				"name": "Biweekly Contest 118",
-				"link": "https://leetcode.com/contest/biweekly-contest-118",
-				"startTime": "Saturday 8:00 PM GMT+5:30",
-				"duration": "2hr"
-			}
-		]
-	}
-]
+{
+  "_comment": "data last scraped on 17 November 2023 at 12:24 pm IST",
+  "data": [
+    {
+      "contestName": "Codechef",
+      "contests": [
+        {
+          "name": "Starters 109",
+          "link": "https://www.codechef.com/START109",
+          "startTime": "22 Nov 2023\nWed 14:30",
+          "duration": "2 Hrs"
+        },
+        {
+          "name": "Starters 110",
+          "link": "https://www.codechef.com/START110",
+          "startTime": "29 Nov 2023\nWed 14:30",
+          "duration": "2 Hrs"
+        },
+        {
+          "name": "Starters 111",
+          "link": "https://www.codechef.com/START111",
+          "startTime": "06 Dec 2023\nWed 14:30",
+          "duration": "2 Hrs"
+        },
+        {
+          "name": "Starters 112",
+          "link": "https://www.codechef.com/START112",
+          "startTime": "13 Dec 2023\nWed 14:30",
+          "duration": "2 Hrs"
+        },
+        {
+          "name": "Starters 113",
+          "link": "https://www.codechef.com/START113",
+          "startTime": "20 Dec 2023\nWed 14:30",
+          "duration": "2 Hrs"
+        },
+        {
+          "name": "Starters 114",
+          "link": "https://www.codechef.com/START114",
+          "startTime": "27 Dec 2023\nWed 14:30",
+          "duration": "2 Hrs"
+        }
+      ]
+    },
+    {
+      "contestName": "Codeforces",
+      "contests": [
+        {
+          "name": "Codeforces Round 909 (Div. 3)",
+          "link": "https://codeforces.com/contestRegistration/1899",
+          "startTime": "Nov/17/2023 14:35UTC",
+          "duration": "02:15"
+        },
+        {
+          "name": "Codeforces Round 910 (Div. 2)",
+          "link": "Before registration 07:40:38",
+          "startTime": "Nov/19/2023 14:35UTC",
+          "duration": "02:00"
+        },
+        {
+          "name": "ICPC 2023 Online Challenge powered by Huawei",
+          "link": "https://codeforces.com/contestRegistration/1885",
+          "startTime": "Nov/20/2023 07:00UTC",
+          "duration": "14:00:00"
+        },
+        {
+          "name": "CodeTON Round 7 (Div. 1 + Div. 2, Rated, Prizes!)",
+          "link": "Before registration 2 days",
+          "startTime": "Nov/25/2023 14:35UTC",
+          "duration": "02:30"
+        }
+      ]
+    },
+    {
+      "contestName": "CodingNinja",
+      "contests": [
+        {
+          "name": "Scholarship Test 11th to 20th Nov'23\nNew",
+          "link": "https://www.codingninjas.com/studio/contests",
+          "startTime": "Live Now",
+          "duration": "2hr"
+        },
+        {
+          "name": "Striver Binary Search Contest",
+          "link": "https://www.codingninjas.com/studio/contests",
+          "startTime": "Live Now",
+          "duration": "2hr"
+        },
+        {
+          "name": "Striver Array Contest",
+          "link": "https://www.codingninjas.com/studio/contests",
+          "startTime": "Live Now",
+          "duration": "2hr"
+        },
+        {
+          "name": "Striver DP Contest",
+          "link": "https://www.codingninjas.com/studio/contests",
+          "startTime": "Live Now",
+          "duration": "2hr"
+        },
+        {
+          "name": "Monthly Contest 20",
+          "link": "https://www.codingninjas.com/studio/contests",
+          "startTime": "Starts in 8 days",
+          "duration": "2hr"
+        },
+        {
+          "name": "Beginner Contest 48",
+          "link": "https://www.codingninjas.com/studio/contests",
+          "startTime": "Starts in 12 days",
+          "duration": "2hr"
+        }
+      ]
+    },
+    {
+      "contestName": "GeeksForGeeks",
+      "contests": [
+        {
+          "name": "GFG Weekly Coding Contest - 129",
+          "link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-129",
+          "startTime": "November 19, 2023 07:00 PM IST",
+          "duration": "1.5hr"
+        },
+        {
+          "name": "Bi-Wizard School Coding Tournament 21.0",
+          "link": "https://practice.geeksforgeeks.org/contest/bi-wizard-school-coding-tournament-210",
+          "startTime": "November 26, 2023 06:00 PM IST",
+          "duration": "1.5hr"
+        },
+        {
+          "name": "Job-A-Thon 27 Hiring Challenge - For Experienced ....",
+          "link": "https://practice.geeksforgeeks.org/contest/job-a-thon-27-hiring-challenge-for-experienced-professionals",
+          "startTime": "December 10, 2023 08:00 PM IST",
+          "duration": "1.5hr"
+        }
+      ]
+    },
+    {
+      "contestName": "Leetcode",
+      "contests": [
+        {
+          "name": "Weekly Contest 372",
+          "link": "https://leetcode.com/contest/weekly-contest-372",
+          "startTime": "Sunday 2:30 AM UTC",
+          "duration": "2hr"
+        },
+        {
+          "name": "Biweekly Contest 118",
+          "link": "https://leetcode.com/contest/biweekly-contest-118",
+          "startTime": "Saturday 2:30 PM UTC",
+          "duration": "2hr"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 const { spawn } = require('child_process')
 const fs = require('fs')
 const axios = require('axios')
+const DateTime = require('luxon').DateTime
 
 // dns.setDefaultResultOrder('ipv4first')
 // require('http').get(
@@ -48,11 +49,18 @@ const data_fetch = async () => {
 	try {
 		const response = await axios.get(
 			'http://scrapping-script-env.eba-g2hnav4p.ap-south-1.elasticbeanstalk.com/',
+			{ timeout: 80000 },
 		)
 
-		console.log(response.data)
+		console.log(JSON.stringify(response.data))
+		const comment = {
+			_comment:
+				'data last scraped on ' +
+				DateTime.now().toLocaleString(DateTime.DATETIME_FULL),
+		}
+		const newData = { ...comment, data: response.data }
 
-		fs.writeFileSync('./data.json', JSON.stringify(response.data))
+		fs.writeFileSync('./data.json', JSON.stringify(newData, null, 2))
 		console.log(
 			'new data added to the data.json file, and have successfully scrapped data',
 		)

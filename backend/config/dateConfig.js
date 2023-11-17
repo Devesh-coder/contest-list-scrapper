@@ -30,7 +30,7 @@ const dateConfig = (contest) => {
 		} else if (contest[i].contestName == 'Codeforces') {
 			contest[i].contests.map((item) => {
 				const dateString = item.startTime
-				const formattedDate = dateString.replace('UTC+5.5', '')
+				const formattedDate = dateString.replace('UTC', '')
 
 				const parsedDate = parse(formattedDate, 'MMM/dd/yyyy HH:mm', new Date())
 				const newFormattedString = format(parsedDate, 'MMMM dd, yyyy hh:mm')
@@ -38,6 +38,7 @@ const dateConfig = (contest) => {
 				const dateVal = DateTime.fromFormat(
 					newFormattedString,
 					'MMMM dd, yyyy hh:mm',
+					{ zone: 'Asia/Kolkata' },
 				)
 				const durationVal = Duration.fromObject({
 					hours: item.durationHours,
