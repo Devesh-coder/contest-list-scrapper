@@ -17,6 +17,9 @@ function PrivacyPolicy() {
 			<div className='date'>Effective date: October 19, 2023</div>
 			<br />
 
+			<div className='date'>Last Updated: October 20, 2023</div>
+			<br />
+
 			<div className='content'>
 				Thanks for trusting Contest Arena ('Contest Arena', 'we', 'us', 'our') with
 				your personal information! We take our responsibility to you very seriously,
@@ -65,6 +68,38 @@ function PrivacyPolicy() {
 				<ul class='list-disc' style={{ marginLeft: '40px' }}>
 					<li>Create and account</li>
 				</ul>
+			</div>
+			<br />
+			<br />
+
+			<h1
+				className='font-bold mb-5'
+				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
+			>
+				How do we use your data?
+			</h1>
+			<div className='content'>
+				Contest Arena uses your data to:
+				<ul class='list-disc' style={{ marginLeft: '40px' }}>
+					<li>Keep you signed in using your profile information. </li>
+					<li>
+						Help you save contests as events directly in your Google Calendar account.
+					</li>
+				</ul>
+			</div>
+			<br />
+			<br />
+			<h1
+				className='font-bold mb-5'
+				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
+			>
+				Use of Google Calendar
+			</h1>
+			<div className='content'>
+				To enhance your experience, Contest Arena allows you to save contests as
+				events in your Google Calendar. This feature is optional and requires access
+				to your Google Calendar, which necessitates signing in with your Google
+				account.
 			</div>
 			<br />
 			<br />

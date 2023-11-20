@@ -137,7 +137,7 @@ export function ComplexNavbar() {
 						<FcGoogle
 							style={isPhoneDisplay ? { fontSize: '1rem' } : { fontSize: '1.5rem' }}
 						/>
-						Log In
+						Sign In with Google
 					</div>
 				</Button>
 			)}
