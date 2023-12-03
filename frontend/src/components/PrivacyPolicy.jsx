@@ -2,14 +2,10 @@ import { useContext } from 'react'
 import ContestContext from '../context/ContestContext'
 
 function PrivacyPolicy() {
-	const { isPhoneDisplay } = useContext(ContestContext)
 	return (
 		<div style={{ width: '65%', margin: 'auto' }}>
 			<br />
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.5rem' : '2rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[2rem]'>
 				Privacy Policy
 			</h1>
 			<br />
@@ -35,10 +31,7 @@ function PrivacyPolicy() {
 			<br />
 			<br />
 
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				What data do we collect?
 			</h1>
 
@@ -56,10 +49,7 @@ function PrivacyPolicy() {
 			<br />
 			<br />
 
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				How do we collect your data?
 			</h1>
 			<div className='content'>
@@ -72,10 +62,7 @@ function PrivacyPolicy() {
 			<br />
 			<br />
 
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				How do we use your data?
 			</h1>
 			<div className='content'>
@@ -89,10 +76,7 @@ function PrivacyPolicy() {
 			</div>
 			<br />
 			<br />
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				Use of Google Calendar
 			</h1>
 			<div className='content'>
@@ -104,10 +88,7 @@ function PrivacyPolicy() {
 			<br />
 			<br />
 
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				How do we store your data?
 			</h1>
 			<div className='content'>
@@ -116,10 +97,7 @@ function PrivacyPolicy() {
 			<br />
 			<br />
 
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				What are cookies?
 			</h1>
 			<div className='content'>
@@ -132,10 +110,7 @@ function PrivacyPolicy() {
 			<br />
 			<br />
 
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				How do we use cookies?
 			</h1>
 			<div className='content'>
@@ -148,10 +123,7 @@ function PrivacyPolicy() {
 			<br />
 			<br />
 
-			<h1
-				className='font-bold mb-5'
-				style={{ fontSize: isPhoneDisplay ? '1.2rem' : '1.5rem' }}
-			>
+			<h1 className='font-bold mb-5 sm:text-[1.5rem] md:text-[1.8rem]'>
 				How to contact us
 			</h1>
 			<div className='content'>

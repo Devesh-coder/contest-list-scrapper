@@ -43,6 +43,7 @@ const profileMenuItems = [
 function ProfileMenu() {
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 	const { logoutHandler, userPicture } = useContext(ContestContext)
+	console.log(userPicture)
 
 	const closeMenu = () => setIsMenuOpen(false)
 
@@ -110,7 +111,7 @@ function ProfileMenu() {
 }
 
 export function ComplexNavbar() {
-	const { isLogged, isPhoneDisplay, login } = useContext(ContestContext)
+	const { isLogged, login } = useContext(ContestContext)
 	console.log(isLogged)
 
 	return (
@@ -134,9 +135,7 @@ export function ComplexNavbar() {
 					className='border-2 border-indigo-400	'
 				>
 					<div className='flex items-center gap-x-2'>
-						<FcGoogle
-							style={isPhoneDisplay ? { fontSize: '1rem' } : { fontSize: '1.5rem' }}
-						/>
+						<FcGoogle className='text-[1rem] md:text-[1.5rem]' />
 						Sign In with Google
 					</div>
 				</Button>

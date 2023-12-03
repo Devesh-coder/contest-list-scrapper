@@ -46,27 +46,28 @@ const DateTime = require('luxon').DateTime
 // }
 
 const data_fetch = async () => {
-	try {
-		const response = await axios.get(
-			'http://scrapping-script-env.eba-g2hnav4p.ap-south-1.elasticbeanstalk.com/',
-			{ timeout: 80000 },
-		)
+	// try {
+	// 	const response = await axios.get(
+	// 		'http://scrapping-script-env.eba-g2hnav4p.ap-south-1.elasticbeanstalk.com/',
+	// 		{ timeout: 80000 },
+	// 	)
 
-		console.log(JSON.stringify(response.data))
-		const comment = {
-			_comment:
-				'data last scraped on ' +
-				DateTime.now().toLocaleString(DateTime.DATETIME_FULL),
-		}
-		const newData = { ...comment, data: response.data }
+	// 	console.log(JSON.stringify(response.data))
+	// 	const comment = {
+	// 		_comment:
+	// 			'data last scraped on ' +
+	// 			DateTime.now().toLocaleString(DateTime.DATETIME_FULL),
+	// 	}
+	// 	const newData = { ...comment, data: response.data }
 
-		fs.writeFileSync('./data.json', JSON.stringify(newData, null, 2))
-		console.log(
-			'new data added to the data.json file, and have successfully scrapped data',
-		)
-	} catch (error) {
-		console.error(error)
-	}
+	// 	fs.writeFileSync('./data.json', JSON.stringify(newData, null, 2))
+	// 	console.log(
+	// 		'new data added to the data.json file, and have successfully scrapped data',
+	// 	)
+	// } catch (error) {
+	// 	console.error(error)
+	// }
+	console.log('inside data-fetcher')
 }
 
 module.exports = data_fetch

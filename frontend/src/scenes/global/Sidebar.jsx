@@ -21,8 +21,7 @@ const Item = ({
 }) => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
-	const { contestClickSlider, showAllContests, isPhoneDisplay } =
-		useContext(ContestContext)
+	const { contestClickSlider, showAllContests } = useContext(ContestContext)
 
 	return (
 		<MenuItem
@@ -36,7 +35,7 @@ const Item = ({
 			onClick={() => {
 				setSelected(title)
 				contestClickSlider(item)
-				if (!isCollapsed && isPhoneDisplay) {
+				if (!isCollapsed) {
 					isCollapsed = 1
 					console.log(isCollapsed)
 				}
@@ -53,15 +52,33 @@ const Item = ({
 const Sidebar = () => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
-	const { contest, contestLogoMap, isPhoneDisplay } = useContext(ContestContext)
-	const [isCollapsed, setIsCollapsed] = useState(0)
+	const { contest, contestLogoMap } = useContext(ContestContext)
 	const [selected, setSelected] = useState('Dashboard')
 
+	const [screenSize, setScreenSize] = useState({
+		dynamicWidth: window.innerWidth,
+	})
+
+	const [isCollapsed, setIsCollapsed] = useState(screenSize.dynamicWidth <= 1000)
+
+	const setDimension = () => {
+		setScreenSize({
+			dynamicWidth: window.innerWidth,
+		})
+	}
+
 	useEffect(() => {
-		if (isPhoneDisplay != isCollapsed) {
-			setIsCollapsed(isPhoneDisplay)
+		window.addEventListener('resize', setDimension)
+
+		return () => {
+			window.removeEventListener('resize', setDimension)
 		}
-	}, [isPhoneDisplay])
+	}, [])
+
+	useEffect(() => {
+		// Update isCollapsed when dynamicWidth changes
+		setIsCollapsed(screenSize.dynamicWidth <= 1000)
+	}, [screenSize.dynamicWidth])
 
 	return (
 		<Box

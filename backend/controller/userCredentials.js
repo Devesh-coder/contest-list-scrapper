@@ -25,9 +25,12 @@ const findUserByEmail = async (email) => {
 }
 
 const findUserById = async (uid) => {
-	const objUid = new mongoose.Types.ObjectId(uid)
-	console.log(objUid, 'inside findUserById')
-	return await User.findById(objUid)
+	// const objUid = mongoose.Types.ObjectId(uid)
+	const objectId = new mongoose.Types.ObjectId(uid)
+
+	// console.log(objUid, 'inside findUserById')
+	return await User.findById(objectId)
+	// return await User.findById(objUid)
 }
 
 module.exports = { updateUser, findUser, findUserByEmail, findUserById }

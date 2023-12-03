@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faCalendarPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Card({ link, title, start, duration, contest, contestName }) {
-	const { color, handleCalendar, isPhoneDisplay } = useContext(ContestContext)
+	const { color, handleCalendar } = useContext(ContestContext)
 	// console.log(color)
 	if (contestName === 'CodingNinja' && start === 'Invalid Date') {
 		start = 'Live Now'
@@ -15,10 +15,8 @@ function Card({ link, title, start, duration, contest, contestName }) {
 			style={{
 				backgroundColor: '#F2F0F0',
 				color: 'black !important',
-				width: isPhoneDisplay ? '14rem' : '16rem',
-				height: isPhoneDisplay ? '18rem' : '16.5rem',
 			}}
-			className='hover:drop-shadow-2xl min-h-full max-h-100 bg-base-100 border-solid border-2 p-4 rounded-md '
+			className='w-[14rem] md:w-[16rem] h-[18rem] md:h-[16.5rem] hover:drop-shadow-2xl min-h-full max-h-100 bg-base-100 border-solid border-2 p-4 rounded-md'
 		>
 			{/* For saving events in google calendar */}
 			<span

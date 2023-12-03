@@ -12,18 +12,11 @@ const dateConfig = (contest) => {
 					item.startTime,
 					'dd LLL yyyy\nEEE hh:mm',
 				)
-				const durationVal = Duration.fromObject({
-					hours: '2',
-				})
 				console.log(
 					'codechef \n',
 					dateVal.toISO(),
 					'\n',
 					dateVal.toLocaleString(DateTime.DATETIME_FULL),
-					'\n',
-					durationVal.toISO(),
-					'\n',
-					durationVal.toFormat('hh:mm'),
 				)
 				item.startTime = dateVal
 			})
@@ -32,31 +25,39 @@ const dateConfig = (contest) => {
 				const dateString = item.startTime
 				const formattedDate = dateString.replace('UTC', '')
 
-				const parsedDate = parse(formattedDate, 'MMM/dd/yyyy HH:mm', new Date())
-				const newFormattedString = format(parsedDate, 'MMMM dd, yyyy hh:mm')
+				/////////////\\\\\\\\\\\\\\\
+				const val = String(formattedDate)
 
-				const dateVal = DateTime.fromFormat(
-					newFormattedString,
-					'MMMM dd, yyyy hh:mm',
-					{ zone: 'Asia/Kolkata' },
-				)
-				const durationVal = Duration.fromObject({
-					hours: item.durationHours,
-					minutes: item.durationMinutes,
-				})
-				console.log(
-					'codeforces \n',
-					dateVal.toISO(),
-					'\n',
-					dateVal.toLocaleString(DateTime.DATETIME_FULL),
-					'\n',
-					durationVal.toISO(),
-				)
-				item.startTime = dateVal
+				const eg = DateTime.fromFormat(val, 'MMM/dd/yyyy HH:mm')
+				console.log(eg.toISO(), '\n', eg.toLocaleString(DateTime.DATETIME_FULL))
+
+				////////////\\\\\\\\\\\\
+
+				// const parsedDate = parse(formattedDate, 'MMM/dd/yyyy HH:mm', new Date())
+				// const newFormattedString = format(parsedDate, 'MMMM dd, yyyy hh:mm')
+
+				// const dateVal = DateTime.fromFormat(
+				// 	newFormattedString,
+				// 	'MMMM dd, yyyy hh:mm',
+				// )
+				// const durationVal = Duration.fromObject({
+				// 	hours: item.durationHours,
+				// 	minutes: item.durationMinutes,
+				// })
+				// console.log(
+				// 	'codeforces \n',
+				// 	dateVal.toISO(),
+				// 	'\n',
+				// 	dateVal.toLocaleString(DateTime.DATETIME_FULL),
+				// 	'\n',
+				// 	durationVal.toISO(),
+				// )
+				// item.startTime = dateVal
+				item.startTime = eg
 			})
 		} else if (contest[i].contestName == 'CodingNinja') {
 			// coding ninja
-			contest[2].contests.map((contest) => {
+			contest[i].contests.map((contest) => {
 				let startTime
 
 				if (contest.startTime.startsWith('Starts in')) {
@@ -79,34 +80,43 @@ const dateConfig = (contest) => {
 				// )
 			})
 		} else if (contest[i].contestName == 'GeeksForGeeks') {
-			contest[3].contests.map((item) => {
+			contest[i].contests.map((item) => {
 				console.log('GeeksForGeeks')
 				const dateString = item.startTime
+
 				const dateVal = DateTime.fromFormat(
 					dateString,
 					"MMMM d, yyyy hh:mm a 'IST'",
 				)
+
+				const reducedDateVal = dateVal.minus({ hours: 5, minutes: 30 })
+
 				console.log(
-					dateVal.toISO(),
+					reducedDateVal.toISO(),
 					'\n',
-					dateVal.toLocaleString(DateTime.DATETIME_FULL),
-					'\n',
-					new Date(dateVal.toString()),
-					'\n',
-					new Date(dateVal).toLocaleString(DateTime.DATETIME_FULL),
-					'\n',
-					dateVal.toString(),
+					reducedDateVal.toLocaleString(DateTime.DATETIME_FULL),
 				)
-				item.startTime = dateVal
+				// console.log(
+				// 	dateVal.toISO(),
+				// 	'\n',
+				// 	dateVal.toLocaleString(DateTime.DATETIME_FULL),
+				// 	'\n',
+				// 	new Date(reducedDateVal).toLocaleString(DateTime.DATETIME_FULL),
+				// 	'\n',
+				// 	String(reducedDateVal).toLocaleString(DateTime.DATETIME_FULL),
+				// 	' hehe',
+				// )
+				// item.startTime = dateVal
+				item.startTime = reducedDateVal
 			})
 		} else if (contest[i].contestName == 'Leetcode') {
-			contest[4].contests.map((contest) => {
+			contest[i].contests.map((contest) => {
 				const durationString = contest.duration.replace('hr', 'hours')
 				const durationVal = DateTime.fromFormat(
 					durationString,
 					"H'hours'",
 				).toFormat("H'h' mm'm'")
-				const dateVal = DateTime.fromFormat(contest.startTime, "EEEE h:mm a 'GMT'Z")
+				const dateVal = DateTime.fromFormat(contest.startTime, "EEEE h:mm a 'UTC'")
 
 				console.log(
 					'leetcode \n',

@@ -1,5 +1,5 @@
 {
-  "_comment": "data last scraped on 17 November 2023 at 12:24 pm IST",
+  "_comment": "data last scraped on 17 November 2023 at 8:42 pm IST",
   "data": [
     {
       "contestName": "Codechef",
@@ -46,28 +46,10 @@
       "contestName": "Codeforces",
       "contests": [
         {
-          "name": "Codeforces Round 909 (Div. 3)",
+          "name": "Codeforces Round 909 (Div. 3)\nEnter »",
           "link": "https://codeforces.com/contestRegistration/1899",
           "startTime": "Nov/17/2023 14:35UTC",
           "duration": "02:15"
-        },
-        {
-          "name": "Codeforces Round 910 (Div. 2)",
-          "link": "Before registration 07:40:38",
-          "startTime": "Nov/19/2023 14:35UTC",
-          "duration": "02:00"
-        },
-        {
-          "name": "ICPC 2023 Online Challenge powered by Huawei",
-          "link": "https://codeforces.com/contestRegistration/1885",
-          "startTime": "Nov/20/2023 07:00UTC",
-          "duration": "14:00:00"
-        },
-        {
-          "name": "CodeTON Round 7 (Div. 1 + Div. 2, Rated, Prizes!)",
-          "link": "Before registration 2 days",
-          "startTime": "Nov/25/2023 14:35UTC",
-          "duration": "02:30"
         }
       ]
     },
@@ -119,6 +101,12 @@
           "name": "GFG Weekly Coding Contest - 129",
           "link": "https://practice.geeksforgeeks.org/contest/gfg-weekly-coding-contest-129",
           "startTime": "November 19, 2023 07:00 PM IST",
+          "duration": "1.5hr"
+        },
+        {
+          "name": "Job-A-Thon 26 Hiring Challenge - For Freshers",
+          "link": "https://practice.geeksforgeeks.org/contest/job-a-thon-26-hiring-challenge-for-freshers",
+          "startTime": "November 21, 2023 08:00 PM IST",
           "duration": "1.5hr"
         },
         {

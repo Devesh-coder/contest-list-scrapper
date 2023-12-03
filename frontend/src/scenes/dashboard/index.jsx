@@ -4,7 +4,7 @@ import Card from '../../components/Card'
 import { DateTime } from 'luxon'
 
 const Dashboard = ({ Contest }) => {
-	let { curContest, contestLogoMap, isPhoneDisplay } = useContext(ContestContext)
+	let { curContest, contestLogoMap } = useContext(ContestContext)
 	if (Contest != null) {
 		curContest = Contest
 	}
@@ -18,13 +18,10 @@ const Dashboard = ({ Contest }) => {
 				<div className='ml-[15%] mt-10 mr-[10%] '>
 					<h1 className='text-2xl font-bold mb-10'>
 						<div style={{ display: 'flex', textAlign: 'center' }}>
-							<div
-								className='mr-[5%]'
-								style={{ fontSize: isPhoneDisplay ? '1.5rem' : '2rem' }}
-							>
+							<div className='mr-[5%] font-bold mb-5 sm:text-[1.5rem] md:text-[2rem]'>
 								{contestLogoMap.get(curContest.contestName)}
 							</div>
-							<div style={{ fontSize: isPhoneDisplay ? '1.2rem' : '2rem' }}>
+							<div className='font-bold mb-5 sm:text-[1.5rem] md:text-[2rem]'>
 								{curContest.contestName}
 							</div>
 						</div>

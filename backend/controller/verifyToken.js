@@ -25,19 +25,39 @@ async function verify(token) {
 
 const verifyToken = async (req, res, next) => {
 	const jwtToken = req.cookies.jwtToken
-	console.log('inside verifyToken')
+	console.log('inside verifyToken', jwtToken)
+	const uid = req.params.id
+	console.log(uid, 'uid')
+	console.log(req.cookies, 'cookies', req.params, 'params')
 
-	if (!jwtToken) {
-		console.log('Unauthorized')
+	if (jwtToken == undefined && uid == 'null') {
+		console.log('user Unauthorized')
 		return res.status(401).json({ status: false, message: 'Login First' })
 	}
-
-	try {
-		await verify(jwtToken)
-		res.json({ status: 'true', message: 'success' })
-	} catch (err) {
-		console.log(err)
-		res.send({ status: 'false', message: 'Session ended, Login again' })
+	if (jwtToken != undefined || uid != 'null') {
+		if (jwtToken != undefined) {
+			await verify(jwtToken)
+			console.log('user verified')
+			next()
+		} else {
+			// silent refresh
+			// if (uid === null) {
+			// 	console.log(err, '\n', 'user had no uid')
+			// 	return res.status(401).json({ status: false, message: 'Login First' })
+			// }
+			try {
+				const token = await refreshToken(req, res)
+				req.cookies.jwtToken = token
+				console.log('user refreshed')
+				next()
+			} catch (err) {
+				console.log(err)
+				console.log('silent refresh failed')
+				return res
+					.status(401)
+					.json({ status: false, message: 'Session Ended login first' })
+			}
+		}
 	}
 }
 

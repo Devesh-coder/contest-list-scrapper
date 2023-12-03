@@ -1,2 +1,2 @@
-/api/* http://contestarena-env.eba-akwwqap2.ap-south-1.elasticbeanstalk.com/:splat 200!
+/api/* http://contestsarena-env.eba-pmuaqbfv.ap-south-1.elasticbeanstalk.com/:splat 200!
 /* /index.html 200

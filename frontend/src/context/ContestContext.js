@@ -20,8 +20,10 @@ export const ContestProvider = ({ children }) => {
 	const [userPicture, setUserPicture] = useState('')
 
 	// const proxy = process.env.BACKEND_URL || 'http://localhost:5000'
-	// 	'http://contestarena-env.eba-akwwqap2.ap-south-1.elasticbeanstalk.com'
+	// 'http://contestsarena-env.eba-pmuaqbfv.ap-south-1.elasticbeanstalk.com'
 	const proxy = '/api'
+	console.log(proxy)
+
 	console.log(proxy)
 
 	const background = [
@@ -68,8 +70,10 @@ export const ContestProvider = ({ children }) => {
 
 	const handleCalendar = async (contest) => {
 		console.log('calendar', contest.contest)
+		const uid = localStorage.getItem('uid')
+		console.log(uid, 'uid')
 		await axios
-			.post(`${proxy}/create-event`, contest, {
+			.post(`${proxy}/create-event/${uid}`, contest, {
 				withCredentials: true,
 			})
 			.then((response) => {
@@ -91,94 +95,72 @@ export const ContestProvider = ({ children }) => {
 		}
 		fetchData()
 
-		let sessionStatus = true
-		const verifyToken = async () => {
-			axios
-				.get(`${proxy}/auth/verify`, {
-					withCredentials: true,
-					referrerPolicy: 'no-referrer',
-				})
-				.then((response) => {
-					console.log(response.data)
-					toast.success('User Signed In', toastSuccess)
-					setUserPicture(localStorage.getItem('uPic'))
-				})
-				.catch(async (err) => {
-					console.log(
-						err.response.data.message,
-						err.response.data.status,
-						sessionStatus,
-					)
-					if (localStorage.getItem('uid') == null) {
-						sessionStatus = false
-						toast.warn(`${err.response.data.message}`, toastWarning)
-						setIsLogged(false)
-					} else {
-						try {
-							console.log(
-								localStorage.getItem('uid'),
-								'inside user credentials in context else',
-							)
-							const credentials = await axios.get(
-								`${proxy}/auth/google/refresh-token/${localStorage.getItem('uid')}`,
-								{
-									withCredentials: true,
-									referrerPolicy: 'no-referrer',
-								},
-							)
-							console.log(credentials.data, credentials.data.message)
-							toast.success(credentials.data.message, toastSuccess)
-							setUserPicture(localStorage.getItem('uPic'))
-						} catch (err) {
-							sessionStatus = false
-							console.log(err)
-							toast.warn(`Session ended, Login Again`, toastWarning)
-							localStorage.removeItem('uid')
-							setIsLogged(false)
-						}
-					}
-				})
+		if (localStorage.getItem('uPic') != null) {
+			setUserPicture(localStorage.getItem('uPic'))
 		}
-		verifyToken()
+
+		let sessionStatus = true
+		// const verifyToken = async () => {
+		// 	axios
+		// 		.get(`${proxy}/auth/verify`, {
+		// 			withCredentials: true,
+		// 			referrerPolicy: 'no-referrer',
+		// 		})
+		// 		.then((response) => {
+		// 			console.log(response.data)
+		// 			toast.success('User Signed In', toastSuccess)
+		// 			setUserPicture(localStorage.getItem('uPic'))
+		// 		})
+		// 		.catch(async (err) => {
+		// 			console.log(
+		// 				err.response.data.message,
+		// 				err.response.data.status,
+		// 				sessionStatus,
+		// 			)
+		// 			if (localStorage.getItem('uid') == null) {
+		// 				sessionStatus = false
+		// 				toast.warn(`${err.response.data.message}`, toastWarning)
+		// 				setIsLogged(false)
+		// 			} else {
+		// 				try {
+		// 					console.log(
+		// 						localStorage.getItem('uid'),
+		// 						'inside user credentials in context else',
+		// 					)
+		// 					const credentials = await axios.get(
+		// 						`${proxy}/auth/google/refresh-token/${localStorage.getItem('uid')}`,
+		// 						{
+		// 							withCredentials: true,
+		// 							referrerPolicy: 'no-referrer',
+		// 						},
+		// 					)
+		// 					console.log(credentials.data, credentials.data.message)
+		// 					toast.success(credentials.data.message, toastSuccess)
+		// 					setUserPicture(localStorage.getItem('uPic'))
+		// 				} catch (err) {
+		// 					sessionStatus = false
+		// 					console.log(err)
+		// 					toast.warn(`Session ended, Login Again`, toastWarning)
+		// 					localStorage.removeItem('uid')
+		// 					setIsLogged(false)
+		// 				}
+		// 			}
+		// 		})
+		// }
+		// verifyToken()
 
 		setIsLoading(false)
 
-		if (localStorage.getItem('uid') != null && !isLogged && sessionStatus) {
+		if (localStorage.getItem('uid') != null) {
 			setIsLogged(true)
 		}
 	}, [])
 
-	const [screenSize, getDimension] = useState({
-		dynamicWidth: window.innerWidth,
-	})
-	const setDimension = () => {
-		getDimension({
-			dynamicWidth: window.innerWidth,
-		})
-	}
-
-	useEffect(() => {
-		window.addEventListener('resize', setDimension)
-
-		return () => {
-			window.removeEventListener('resize', setDimension)
-		}
-	}, [screenSize])
-
-	let isPhoneDisplay = 0
-	if (screenSize.dynamicWidth <= 1000) {
-		isPhoneDisplay = 1
-		// console.log(isPhoneDisplay)
-	}
-
-	// userLogging
-	// const [user, setUser] = useState(null)
-
 	const loginHandler = async (uid, userPic) => {
 		localStorage.setItem('uid', uid)
-		localStorage.setItem('uPic', userPic)
 		setIsLogged(true)
 		setUserPicture(userPic)
+		localStorage.setItem('uPic', userPic)
 		// setUser(jwtToken)
 	}
 
@@ -211,16 +193,21 @@ export const ContestProvider = ({ children }) => {
 	})
 
 	const logoutHandler = async () => {
-		await axios.get(`${proxy}/auth/logout`, {
-			withCredentials: true,
-			referrerPolicy: 'no-referrer',
-		})
+		try {
+			await axios.get(`${proxy}/auth/logout`, {
+				withCredentials: true,
+				referrerPolicy: 'no-referrer',
+			})
 
-		localStorage.removeItem('uid')
-		localStorage.removeItem('uPic')
-		setIsLogged(false)
-		toast.success('Logout Successful', toastSuccess)
-		// setUser(null)
+			localStorage.removeItem('uid')
+			localStorage.removeItem('uPic')
+			setIsLogged(false)
+			toast.success('Logout Successful', toastSuccess)
+			// setUser(null)
+		} catch (err) {
+			console.log(err)
+			toast.warn(err.message, toastWarning)
+		}
 	}
 
 	const toastSuccess = {
@@ -255,7 +242,6 @@ export const ContestProvider = ({ children }) => {
 				handleCalendar,
 				showAllContests,
 				contestLogoMap,
-				isPhoneDisplay,
 				loginHandler,
 				logoutHandler,
 				isLogged,

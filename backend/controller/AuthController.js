@@ -42,12 +42,12 @@ const callback = asyncHandler(async (req, res) => {
 	})
 })
 
-const refreshToken = asyncHandler(async (req, res) => {
-	const uid = req.params.uid
+const refreshToken = async (req, res) => {
+	const uid = req.params.id
 	console.log(uid, 'uid')
 
 	const { refreshToken } = await findUserById(uid)
-	console.log('refreshToken generated')
+	console.log('refreshToken generated', refreshToken)
 	const user = new UserRefreshClient(
 		process.env.CLIENT_ID,
 		process.env.CLIENT_SECRET,
@@ -65,8 +65,7 @@ const refreshToken = asyncHandler(async (req, res) => {
 	})
 
 	console.log('cookie set')
-
-	res.json({ status: true, message: 'Session Extended' })
-})
+	return credentials.id_token
+}
 
 module.exports = { callback, refreshToken }
