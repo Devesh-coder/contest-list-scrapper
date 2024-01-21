@@ -8,6 +8,9 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import ContestContext from '../../context/ContestContext'
 import { useContext } from 'react'
+// import {createBreakpoint} from 'react-use'
+
+// const useBreakpoint = createBreakpoint({ XL: 1280, L: 768, S: 350 });
 
 const Item = ({
 	title,
@@ -18,10 +21,13 @@ const Item = ({
 	item,
 	isCollapsed,
 	handleClick,
+	isPhoneDisplay
 }) => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 	const { contestClickSlider, showAllContests } = useContext(ContestContext)
+	// const breakpoint = useBreakpoint();
+
 
 	return (
 		<MenuItem
@@ -35,9 +41,10 @@ const Item = ({
 			onClick={() => {
 				setSelected(title)
 				contestClickSlider(item)
-				if (!isCollapsed) {
+				if (!isCollapsed && isPhoneDisplay) {
 					isCollapsed = 1
 					console.log(isCollapsed)
+					// console.log(breakPoint);
 				}
 				handleClick(isCollapsed)
 			}}
@@ -54,6 +61,8 @@ const Sidebar = () => {
 	const colors = tokens(theme.palette.mode)
 	const { contest, contestLogoMap } = useContext(ContestContext)
 	const [selected, setSelected] = useState('Dashboard')
+	const [isPhoneDisplay, setIsPhoneDisplay] = useState(0)
+
 
 	const [screenSize, setScreenSize] = useState({
 		dynamicWidth: window.innerWidth,
@@ -78,6 +87,7 @@ const Sidebar = () => {
 	useEffect(() => {
 		// Update isCollapsed when dynamicWidth changes
 		setIsCollapsed(screenSize.dynamicWidth <= 1000)
+		setIsPhoneDisplay(screenSize.dynamicWidth <= 1000)
 	}, [screenSize.dynamicWidth])
 
 	return (
@@ -160,6 +170,7 @@ const Sidebar = () => {
 								setSelected={setSelected}
 								isCollapsed={isCollapsed}
 								handleClick={(value) => setIsCollapsed(value)}
+								isPhoneDisplay={isPhoneDisplay}
 							/>
 						))}
 					</Box>

@@ -21,6 +21,7 @@
 	},
 	"homepage": "https://github.com/Devesh-coder/contest-list-scrapper#readme",
 	"dependencies": {
-		"concurrently": "^8.0.1"
+		"concurrently": "^8.0.1",
+		"react-use": "^17.4.4"
 	}
 }
